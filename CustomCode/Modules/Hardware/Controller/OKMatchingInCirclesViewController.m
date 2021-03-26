@@ -386,7 +386,7 @@
         case OKMatchingTypeTransfer:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only) {
+                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only &&[deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
                     [kTools hideHwMessage];
                     OKSendCoinViewController *sendCoinVc = [OKSendCoinViewController sendCoinViewController];
                     sendCoinVc.coinType = kWalletManager.currentWalletInfo.coinType;
@@ -394,10 +394,17 @@
                     sendCoinVc.tokenCoinType = self.tokenCoinType;
                     [self.navigationController pushViewController:sendCoinVc animated:YES];
                 }else{
-                    [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
-                    [kOKBlueManager disconnectAllPeripherals];
-                    [kTools hideHwMessage];
-                    [weakself.navigationController popViewControllerAnimated:YES];
+                    if (![deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
+                        OKDeviceIdInconsistentViewController *deviceIdVc = [OKDeviceIdInconsistentViewController deviceIdInconsistentViewController:deviceModel.deviceInfo.ble_name];
+                        deviceIdVc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                        [weakself.OK_TopViewController presentViewController:deviceIdVc animated:NO completion:nil];
+                    }else{
+                        [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
+                        [kOKBlueManager disconnectAllPeripherals];
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [weakself.navigationController popViewControllerAnimated:YES];
+                        return;
+                    }
                 }
             });
         }
@@ -405,7 +412,7 @@
         case OKMatchingTypeReceiveCoin:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only) {
+                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only&&[deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
                     [kTools hideHwMessage];
                     OKReceiveCoinViewController *receiveCoinVc = [OKReceiveCoinViewController receiveCoinViewController];
                     receiveCoinVc.coinType = kWalletManager.currentWalletInfo.coinType;
@@ -414,11 +421,18 @@
                     receiveCoinVc.tokenCoinAddr = self.tokenAddr;
                     [self.navigationController pushViewController:receiveCoinVc animated:YES];
                 }else{
-                    [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
-                    [kOKBlueManager disconnectAllPeripherals];
-                    [kTools hideHwMessage];
-                    [weakself.navigationController popViewControllerAnimated:YES];
-                    return;
+                    if (![deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
+                        OKDeviceIdInconsistentViewController *deviceIdVc = [OKDeviceIdInconsistentViewController deviceIdInconsistentViewController:deviceModel.deviceInfo.ble_name];
+                        deviceIdVc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                        [weakself.OK_TopViewController presentViewController:deviceIdVc animated:NO completion:nil];
+                    }else{
+                        [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
+                        [kOKBlueManager disconnectAllPeripherals];
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [weakself.navigationController popViewControllerAnimated:YES];
+                        return;
+                    }
+
                 }
             });
         }
@@ -426,16 +440,22 @@
         case OKMatchingTypeSignatureData:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only) {
+                if (deviceModel.deviceInfo.initialized && !deviceModel.deviceInfo.backup_only && [deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
                     [kTools hideHwMessage];
                     OKSignatureViewController *signatureVc = [OKSignatureViewController signatureViewController];
                     [self.navigationController pushViewController:signatureVc animated:YES];
                 }else{
-                    [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
-                    [kOKBlueManager disconnectAllPeripherals];
-                    [kTools hideHwMessage];
-                    [weakself.navigationController popViewControllerAnimated:YES];
-                    return;
+                    if (![deviceModel.deviceInfo.device_id isEqualToString:kWalletManager.currentWalletInfo.device_id]) {
+                        OKDeviceIdInconsistentViewController *deviceIdVc = [OKDeviceIdInconsistentViewController deviceIdInconsistentViewController:deviceModel.deviceInfo.ble_name];
+                        deviceIdVc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                        [weakself.OK_TopViewController presentViewController:deviceIdVc animated:NO completion:nil];
+                    }else{
+                        [kTools tipMessage:MyLocalizedString(@"This operation is not supported if the current device is not active, or if the special device is backed up", nil)];
+                        [kOKBlueManager disconnectAllPeripherals];
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [weakself.navigationController popViewControllerAnimated:YES];
+                        return;
+                    }
                 }
             });
         }

@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OKDeviceIdInconsistentViewController : BaseViewController
-+ (instancetype)deviceIdInconsistentViewController;
++ (instancetype)deviceIdInconsistentViewController:(NSString *)bleName;
 @end
 
 NS_ASSUME_NONNULL_END
