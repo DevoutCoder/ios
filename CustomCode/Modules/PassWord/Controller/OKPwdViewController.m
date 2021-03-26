@@ -138,7 +138,7 @@ typedef enum {
     self.navigationController.delegate = self;
     self.pwdInputViewFirst.delegate = self;
     self.pwdInputViewSecond.delegate = self;
-
+    self.forbidInteractivePopGestureRecognizer = YES;
     
     
     [self.pwdInputViewFirst updateWithConfigure:^(CLPasswordInputViewConfigure * _Nonnull configure) {
@@ -216,6 +216,7 @@ typedef enum {
 
 #pragma mark - 重置跳转
 - (void)resetViewWithAnimated:(BOOL)animated {
+    CGFloat H = self.oldPwd.length > 0 ? -APP_NAVIGATIONBAR_HEIGHT:0;
     //短密码
     if (self.type == PwdTypeShort) {
         if (self.page == PageTypeFirst) { //第一页
@@ -223,7 +224,7 @@ typedef enum {
         }else if (self.page == PageTypeSecond){
             [self.pwdInputViewSecond becomeFirstResponder];
         }
-        [self.scrollViewBg setContentOffset:CGPointMake(self.page * SCREEN_WIDTH, 0) animated:animated];
+        [self.scrollViewBg setContentOffset:CGPointMake(self.page * SCREEN_WIDTH, H) animated:animated];
         return;
     }
     //长密码
@@ -232,7 +233,7 @@ typedef enum {
     }else if (self.page == PageTypeSecond){
         [self.longPwdSecondTextField becomeFirstResponder];
     }
-    [self.scrollViewBg setContentOffset:CGPointMake(self.page * SCREEN_WIDTH, 0) animated:animated];
+    [self.scrollViewBg setContentOffset:CGPointMake(self.page * SCREEN_WIDTH, H) animated:animated];
 }
 
 
