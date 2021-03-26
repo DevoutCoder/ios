@@ -155,12 +155,12 @@ function modify_pbxproj() {
     exit 1
   fi
 
-  (cd iOS && python3.8 -m pbxproj folder -t "${xcode_target}" -r -i "${xcode_file}" ../Resources -w -s)
+  (cd iOS && python3.8 -m pbxproj folder -t "${xcode_target}" -r -i "${xcode_file}" ./Resources -w -s)
   if [ "$?" != 0 ]; then
     echo "Error adding Resources to iOS/$xcode_file... aborting."
     exit 1
   fi
-  (cd iOS && python3.8 -m pbxproj folder -t "${xcode_target}" -r -i "${xcode_file}" ../CustomCode)
+  (cd iOS && python3.8 -m pbxproj folder -t "${xcode_target}" -r -i "${xcode_file}" ./CustomCode)
   if [ "$?" != 0 ]; then
     echo "Error adding CustomCode to iOS/$xcode_file... aborting."
     exit 1
