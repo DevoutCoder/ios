@@ -16,7 +16,7 @@ final class OKDiscoverViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
 
-   private  var networkErrorView: NetworkErrorView?
+    private var networkErrorView: NetworkErrorView?
 
     var bridge: WKWebViewJavascriptBridge!
 
@@ -49,7 +49,8 @@ final class OKDiscoverViewController: UIViewController {
             let model = OKWebJSModel(paramters: paramters)
             switch model.jsAction() {
             case .openDapp:
-                DAppWebManage.handleOpenDApp(model: model) {
+                guard let jsParams = model.jsParams() else { return }
+                DAppWebManage.handleOpenDApp(model: jsParams) {
                     callback?(["id":  model.id ?? "", "result" : "success"])
                 }
                 break
@@ -57,6 +58,11 @@ final class OKDiscoverViewController: UIViewController {
                 DAppWebManage.handleOpenDApp(url: model.params ?? "") {
                     callback?(["id":  model.id ?? "", "result" : "success"])
                 }
+                break
+            case .openFavorite:
+                OKDappCollectViewController.present()
+                callback?(["id":  model.id ?? "", "result" : "success"])
+                break
             case .unknow:
                 break
             }
@@ -73,7 +79,7 @@ final class OKDiscoverViewController: UIViewController {
         guard let url = URL(string: url) else { return }
         let request = URLRequest(
             url: url,
-            cachePolicy: .reloadRevalidatingCacheData,
+            cachePolicy: .useProtocolCachePolicy,
             timeoutInterval: 30
         )
         webView.load(request)

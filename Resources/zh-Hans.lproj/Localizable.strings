@@ -608,6 +608,9 @@
 "Gas Price is too much, do you want to continue?" = "Gas Price 太多，是否继续？";
 "Continue" = "继续";
 "Incorrect link format" = "链接格式有误";
+"Confirm delete" = "确定删除";
+"My Favorites" = "我的收藏";
+"No content" = "暂无任何内容";
 // Discover Associated - end
 "No account with transaction history was found. You can choose to create a new account" = "没有找到有交易记录的账户，您可以选择创建新账户";
 "In the connection..." = "连接中...";

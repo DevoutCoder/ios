@@ -17,16 +17,11 @@ final class OKDAppWebViewController: UIViewController {
     private  var networkErrorView: NetworkErrorView?
 
     private  var requestAccountsId: Int64 = 0
-    var webViewObserver: WKWebViewObserver!
-    private var dappModel: OKWebJSModel?
 
-    static func instance(homepage: String) -> OKDAppWebViewController {
-        let page = OKDAppWebViewController.instantiate()
-        page.homepage = homepage
-        return page
-    }
+    private var webViewObserver: WKWebViewObserver!
+    private var dappModel: OKDappItem!
 
-    static func instanceWithModel(dappModel: OKWebJSModel) -> OKDAppWebViewController {
+    static func instanceWithModel(dappModel: OKDappItem) -> OKDAppWebViewController {
         let page = OKDAppWebViewController.instantiate()
         page.dappModel = dappModel
         return page
@@ -62,11 +57,6 @@ final class OKDAppWebViewController: UIViewController {
         super.viewDidLoad()
         setUpWebView()
         setUpSubviews()
-        if let model = dappModel {
-            homepage = model.jsParams()?.url ?? ""
-            navTitle.text = model.jsParams()?.name ?? homepage
-            tokenImage.image = model.jsParams()?.chain?.coinImage
-        }
         configurationContent()
 //        homepage = "https://app.uniswap.org/#/swap"
 //        homepage = "https://zksync.io/"
@@ -117,6 +107,12 @@ final class OKDAppWebViewController: UIViewController {
     }
 
     private func configurationContent() {
+
+        homepage = dappModel.url
+        navTitle.text = getNavTitle()
+        if dappModel.chain.isNotEmpty {
+            tokenImage.image = dappModel.chain.coinImage
+        }
         if let wallet = OKWalletManager.sharedInstance().currentWalletInfo {
             accountName.text = wallet.addr.addressName
             tokenImage.image = wallet.coinType.coinImage
@@ -157,9 +153,17 @@ final class OKDAppWebViewController: UIViewController {
         webView.load(request)
     }
 
+    private func getWebViewTitle() -> String {
+        if let title = webView.title, title.isNotEmpty {
+            return title
+        } else {
+            return webView.url?.absoluteString ?? ""
+        }
+    }
+
     @IBAction func selectAccount(_ sender: Any) {
         let page = OKChangeWalletController.withStoryboard()
-        page.chianType = DAppWebManage.transformChainType(dappModel?.jsParams()?.chain ?? "")
+        page.chianType = DAppWebManage.transformChainType(dappModel.chain)
         page.walletChangedCallback = { [weak self] value in
             if value.addr != self?.address {
                 self?.updateAccount()
@@ -171,24 +175,31 @@ final class OKDAppWebViewController: UIViewController {
     }
 
     @IBAction func tapMenuButton(_ sender: Any) {
-        var jsParams = dappModel?.jsParams()
-        if jsParams == nil {
-            jsParams = OKWebJSParams(
-                chain: OKWalletManager.sharedInstance().currentWalletInfo?.coinType,
-                description: homepage,
-                name: webView.title,
-                url: homepage
-            )
+        // 更新信息
+        if dappModel.name.isEmpty {
+            dappModel.name = getNavTitle()
         }
-        OKDAppMenuSheetController.show(model: jsParams) { [weak self] type in
+        if dappModel.img.isEmpty {
+            dappModel.img = webView.url?.absoluteString.favicon() ?? ""
+        }
+        if dappModel.subtitle.isEmpty && dappModel.description.isEmpty {
+            dappModel.subtitle = webView.url?.absoluteString ?? ""
+        }
+        OKDAppMenuSheetController.show(model: dappModel) { [weak self] type in
             guard let self = self else { return }
             switch type {
             case .switchAccount:
                 self.selectAccount(self)
                 break
             case .collect:
+                DAppFavoriteManage.addFavorite(item: self.dappModel) {
+                    OKTools.sharedInstance().tipMessage("已收藏")
+                }
                 break
             case .collected:
+                DAppFavoriteManage.removeFavorite(item: self.dappModel) {
+                    OKTools.sharedInstance().tipMessage("已取消收藏")
+                }
                 break
             case .onekeyKeys:
                 break
@@ -198,31 +209,39 @@ final class OKDAppWebViewController: UIViewController {
                 self.reloadWebView()
                 break
             case .share:
-                if let model = jsParams {
-                    var activityItems: [Any] = []
-                    activityItems.append(model.name ?? "DApp")
-                    if let url = jsParams?.url?.toURL {
-                        activityItems.append(url)
-                    }
-                    OKSystemShareView.show(
-                        withActivityItems: activityItems,
-                        parentVc: self) {
-                    }
-                    shareCompletionBlock: {
-                    }
+                var activityItems: [Any] = []
+                activityItems.append(self.dappModel?.name ?? "DApp")
+                if let url = self.dappModel.url.toURL {
+                    activityItems.append(url)
+                }
+                OKSystemShareView.show(
+                    withActivityItems: activityItems,
+                    parentVc: self) {
+                }
+                shareCompletionBlock: {
                 }
                 break
             case .copyURL:
-                guard let url = jsParams?.url, !url.isEmpty else { return }
-                UIPasteboard.general.string = url
+                UIPasteboard.general.string = self.webView.url?.absoluteString ?? ""
                 OKTools.sharedInstance().tipMessage("Copied".localized)
                 break
             case .openInSafari:
-                guard let url = jsParams?.url?.toURL else { return }
+                guard let url = self.dappModel?.url.toURL else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 break
             }
         }
+    }
+
+    private func getNavTitle() -> String {
+        var string = dappModel.name
+        if string.isEmpty  {
+            string = webView.title ?? ""
+        }
+        if string.isEmpty  {
+            string = webView.url?.absoluteString ?? ""
+        }
+        return string
     }
 
     @IBAction func tapCloseButton(_ sender: Any) {

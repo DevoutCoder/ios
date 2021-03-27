@@ -126,8 +126,8 @@ class DAppWebManage {
         data: Data,
         password: String,
         personal: Bool,
-        completion: @escaping (String) -> Void
-    ) {
+        completion: @escaping (String) -> Void)
+    {
         let newData = personal ? ethereumMessage(for: data).keccak256.data(using: .utf8)! : data
         let message = newData.string(encoding: .utf8)!
         let parameter = [
@@ -157,19 +157,21 @@ class DAppWebManage {
         guard !url.isEmpty else { return }
         let homepage = url.addPreHttps
         if homepage.isValidURL() {
-            let page = OKDAppWebViewController.instance(homepage: homepage)
-            UIApplication.shared.keyWindow?.rootViewController?.presentPanModal(page)
-            callBackClick()
+            var model = OKDappItem()
+            model.url = homepage
+            model.from = .url
+            handleOpenDApp(model: model, callBackClick: callBackClick)
         } else {
             OKTools.sharedInstance().tipMessage("Incorrect link format".localized)
         }
     }
 
-    static func handleOpenDApp(model: OKWebJSModel, callBackClick: @escaping (() -> ())) {
+    static func handleOpenDApp(model: OKDappItem, callBackClick: @escaping (() -> ())) {
 
-        guard let data = model.jsParams() else { return }
-        guard let chain = data.chain else { return }
-        guard let url = data.url, !url.isEmpty else { return }
+        let url = model.url.addPreHttps
+        guard !url.isEmpty else { return }
+        let dappChainType = model.chain.uppercased()
+        let dappName = model.name.isNotEmpty ? model.name : "DApp"
 
         func goDAppBroswer() {
             let page = OKDAppWebViewController.instanceWithModel(dappModel: model)
@@ -177,17 +179,25 @@ class DAppWebManage {
             callBackClick()
         }
 
+        func changeWallet() {
+            let page = OKChangeWalletController.withStoryboard()
+            page.chianType = [DAppWebManage.transformChainType(dappChainType)]
+            page.walletChangedCallback = { _ in
+                self.handleOpenDApp(model: model, callBackClick: callBackClick)
+            }
+            page.modalPresentationStyle = .overCurrentContext
+            OKTools.ok_TopViewController().present(page, animated: false, completion: nil)
+        }
+
         guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else {
             goDAppBroswer()
             return
         }
 
-        let dappCoinType = chain.uppercased()
-
-        if !DAppWebManage.supportDAppCoinTypes().contains(dappCoinType) {
+        if  dappChainType.isNotEmpty, !DAppWebManage.supportDAppCoinTypes().contains(dappChainType) {
             PanBottomAlertViewController.show(
                 icon: nil,
-                title: "Temporary does not support".localized + " " + chain.uppercased(),
+                title: "Temporary does not support".localized + " " + dappChainType,
                 content: "Stay tuned".localized,
                 leftAction: .init(normalTitle: "cancel".localized, onTap: nil),
                 rightAction: .init(highlightTitle: "determine".localized, onTap: {
@@ -197,15 +207,15 @@ class DAppWebManage {
             return
         }
 
-        if wallet.coinType.uppercased() != dappCoinType || wallet.walletType == .observe {
+        if dappChainType.isNotEmpty, wallet.coinType.uppercased() != dappChainType || wallet.walletType == .observe {
             PanBottomAlertViewController.show(
                 icon: nil,
-                title: String(format: "Switch to %@ account?".localized, dappCoinType),
-                content: String(format: "Current DApp only supports %@ account".localized, dappCoinType),
+                title: String(format: "Switch to %@ account?".localized, dappChainType),
+                content: String(format: "Current DApp only supports %@ account".localized, dappChainType),
                 leftAction: .init(normalTitle: "cancel".localized, onTap: nil),
                 rightAction: .init(highlightTitle: "determine".localized, onTap: {
                     let page = OKChangeWalletController.withStoryboard()
-                    page.chianType = [DAppWebManage.transformChainType(dappCoinType)]
+                    page.chianType = [DAppWebManage.transformChainType(dappChainType)]
                     page.walletChangedCallback = { _ in
                         self.handleOpenDApp(model: model, callBackClick: callBackClick)
                     }
@@ -221,10 +231,10 @@ class DAppWebManage {
         if let value = UserDefaults.standard[key] as? String, !value.isEmpty {
             goDAppBroswer()
         } else {
-            let content = String(format: "Your use of third-party DApps will be applicable to the third-party DApp’s \"Privacy Policy\" and \"User Agreement\", and %@ will be directly and solely liable to you".localized, data.name ?? "aapp")
+            let content = String(format: "Your use of third-party DApps will be applicable to the third-party DApp’s \"Privacy Policy\" and \"User Agreement\", and %@ will be directly and solely liable to you".localized, dappName)
             PanBottomAlertViewController.show(
-                icon: data.img == nil ? nil : .init(remoteImageURLString: data.img!),
-                title: data.name ?? "DApp",
+                icon: model.img.isEmpty ? nil : .init(remoteImageURLString: model.img),
+                title: dappName,
                 content: content,
                 leftAction: .init(normalTitle: "cancel".localized, onTap: nil),
                 rightAction: .init(highlightTitle: "Continue to visit".localized, onTap: {

@@ -42,6 +42,9 @@ extension String {
    }
 
     var addPreHttps: String {
+        if isEmpty {
+            return ""
+        }
         if hasPrefix("https") {
             return self
         } else if hasPrefix("//") {
@@ -87,6 +90,12 @@ extension String {
         return URL.init(string: self)
     }
 
+    var toUIImage: UIImage? {
+        if isEmpty {
+            return nil
+        }
+        return UIImage(named: self)
+    }
 
     var addressName: String {
         if count <= 4 {
@@ -112,6 +121,17 @@ extension String {
             return self.uppercased()
         }
     }
+
+    func favicon() -> String {
+        guard let url = self.addPreHttps.toURL else { return  "" }
+        guard let host = url.host else { return "" }
+        return "https://api.faviconkit.com/\(host)/144"
+    }
+
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+
 }
 
 extension String {

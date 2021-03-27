@@ -11,6 +11,7 @@ import Foundation
 enum OKWebJSAction: String, Decodable, CaseIterable {
     case openDapp
     case openURL
+    case openFavorite
     case unknow
 }
 
@@ -31,10 +32,10 @@ struct OKWebJSModel {
         return OKWebJSAction(rawValue: method) ?? .unknow
     }
 
-    func jsParams() -> OKWebJSParams? {
+    func jsParams() -> OKDappItem? {
         guard let params = params else { return nil }
         let decoder = JSONDecoder()
-        return try? decoder.decode(OKWebJSParams.self, from: params.data(using: .utf8)!)
+        return try? decoder.decode(OKDappItem.self, from: params.data(using: .utf8)!)
     }
 
 }

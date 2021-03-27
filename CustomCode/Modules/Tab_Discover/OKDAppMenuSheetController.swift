@@ -12,9 +12,9 @@ import PanModal
 
 final class OKDAppMenuSheetController: PanModalViewController {
 
-    private var model: OKWebJSParams?
+    private var model: OKDappItem!
 
-    static func show(model: OKWebJSParams?, tapAction: @escaping ((OKDAppMenuType) -> Void)) {
+    static func show(model: OKDappItem, tapAction: @escaping ((OKDAppMenuType) -> Void)) {
         let page = OKDAppMenuSheetController.instantiate()
         page.model = model
         page.tapAction = tapAction
@@ -29,13 +29,7 @@ final class OKDAppMenuSheetController: PanModalViewController {
 
     var tapAction: ((OKDAppMenuType) -> Void)?
 
-    private lazy var dataSource: [OKDAppMenuType] = {
-        return [
-            .switchAccount,
-//            .collect, .onekeyKeys, .floatingWindow,
-            .refresh, .share, .copyURL, .openInSafari
-        ]
-    }()
+    private lazy var dataSource: [OKDAppMenuType] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,14 +39,9 @@ final class OKDAppMenuSheetController: PanModalViewController {
             self.dismiss(animated: true, completion: nil)
         }
 
-        if let model = model {
-            dappTitle.text = model.name ?? "DApp"
-            let des =  model.description ?? ""
-            dappDes.text = des.isEmpty ? (model.subtitle ?? "") : des
-            if let img = model.img, !img.isEmpty {
-                dappIcon.setNetImage(url: img.addPreHttps)
-            }
-        }
+        dappTitle.text = model.dappName()
+        dappDes.text = model.dappDescription()
+        dappIcon.setNetImage(url: model.dappIconURLString())
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -63,6 +52,16 @@ final class OKDAppMenuSheetController: PanModalViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cellType: OKDAppMenuSheetCollectionCell.self)
+        DAppFavoriteManage.isFavorite(item: model) { [weak self] flag in
+            guard let self = self else { return }
+            self.dataSource.append(contentsOf: [
+                .switchAccount,
+                flag ? .collected : .collect,
+//                .onekeyKeys, .floatingWindow,
+                .refresh, .share, .copyURL, .openInSafari
+            ])
+            self.collectionView.reloadData()
+        }
     }
 
     override var transitionDuration: Double {
