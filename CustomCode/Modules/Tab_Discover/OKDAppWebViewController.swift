@@ -4,7 +4,7 @@ import WebKit
 import Reusable
 import PanModal
 
-final class OKDAppWebViewController: UIViewController {
+final class OKDAppWebViewController: ViewController {
 
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var navTitle: UILabel!
@@ -50,7 +50,7 @@ final class OKDAppWebViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        webView.stopLoading()
+//        webView.stopLoading()
     }
 
     override func viewDidLoad() {
@@ -71,7 +71,7 @@ final class OKDAppWebViewController: UIViewController {
             controller.addUserScript(scriptConfig.injectedScript)
         }
         for name in DAppMethod.allCases {
-            controller.add(self, name: name.rawValue)
+            controller.add(ScriptMessageProxy(delegate: self), name: name.rawValue)
         }
         config.userContentController = controller
         webView = WKWebView(frame: .zero, configuration: config)
@@ -165,9 +165,11 @@ final class OKDAppWebViewController: UIViewController {
         let page = OKChangeWalletController.withStoryboard()
         page.chianType = DAppWebManage.transformChainType(dappModel.chain)
         page.walletChangedCallback = { [weak self] value in
-            if value.addr != self?.address {
-                self?.updateAccount()
-                self?.reloadWebView()
+            guard let self = self else { return }
+            if value.addr != self.address {
+                self.address = value.addr
+                self.updateAccount()
+                self.reloadWebView()
             }
         }
         page.modalPresentationStyle = .overCurrentContext
@@ -257,8 +259,9 @@ final class OKDAppWebViewController: UIViewController {
 
     private func updateAccount() {
         guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else { return }
-        accountName.text = wallet.label
+        accountName.text = wallet.addr.addressName
         address = wallet.addr
+        tokenImage.image = wallet.coinType.coinImage
         updateRPCInfo()
         handleRequestAccounts()
     }
@@ -447,6 +450,7 @@ extension OKDAppWebViewController: WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        debugPrint("runJavaScriptAlertPanelWithMessage: " + message)
 //        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
 //        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
 //            completionHandler()
@@ -455,6 +459,7 @@ extension OKDAppWebViewController: WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        debugPrint("runJavaScriptConfirmPanelWithMessage: " + message)
 //        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
 //        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
 //            completionHandler(true)

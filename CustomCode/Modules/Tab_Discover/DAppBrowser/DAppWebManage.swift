@@ -73,8 +73,8 @@ class DAppWebManage {
         let address = wallet?.addr ?? ""
 //        return WKUserScriptConfig(
 //            address: address,
-////            chainId: 1,
-////            rpcUrl: "https://mainnet.infura.io/v3/6e822818ec644335be6f0ed231f48310",
+//            chainId: 1,
+//            rpcUrl: "https://mainnet.infura.io/v3/6e822818ec644335be6f0ed231f48310",
 //            chainId: 3,
 //            rpcUrl: "https://ropsten.infura.io/v3/f911e0056b6845e2b71419434c5f08a8",
 //            privacyMode: false
@@ -171,7 +171,13 @@ class DAppWebManage {
         let url = model.url.addPreHttps
         guard !url.isEmpty else { return }
         let dappChainType = model.chain.uppercased()
-        let dappName = model.name.isNotEmpty ? model.name : "DApp"
+        var dappName = model.name
+        if dappName.isEmpty {
+            dappName = model.url
+        }
+        if dappName.isEmpty {
+            dappName = "DApp"
+        }
 
         func goDAppBroswer() {
             let page = OKDAppWebViewController.instanceWithModel(dappModel: model)
