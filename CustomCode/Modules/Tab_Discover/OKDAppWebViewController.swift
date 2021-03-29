@@ -29,10 +29,7 @@ final class OKDAppWebViewController: ViewController {
 
     private var homepage = ""
 
-    private lazy var address: String = {
-        let wallet = OKWalletManager.sharedInstance().currentWalletInfo;
-        return wallet?.addr ?? ""
-    }()
+    private var address: String = ""
 
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
@@ -168,7 +165,7 @@ final class OKDAppWebViewController: ViewController {
             guard let self = self else { return }
             if value.addr != self.address {
                 self.address = value.addr
-                self.updateAccount()
+                self.updateAccount(wallet: value)
                 self.reloadWebView()
             }
         }
@@ -257,17 +254,16 @@ final class OKDAppWebViewController: ViewController {
         leftSpliteLineWidth.constant = flag ? 0.5 : 0
     }
 
-    private func updateAccount() {
-        guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else { return }
+    private func updateAccount(wallet: OKWalletInfoModel) {
         accountName.text = wallet.addr.addressName
         address = wallet.addr
         tokenImage.image = wallet.coinType.coinImage
-        updateRPCInfo()
+        updateRPCInfo(address: address)
         handleRequestAccounts()
     }
 
-    private func updateRPCInfo() {
-        guard let scriptConfig = DAppWebManage.fetchScriptConfig() else { return }
+    private func updateRPCInfo(address: String) {
+        guard let scriptConfig = DAppWebManage.fetchScriptConfig(address: address) else { return }
         webView.configuration.userContentController.addUserScript(scriptConfig.injectedScript)
     }
 

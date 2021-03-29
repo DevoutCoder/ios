@@ -68,9 +68,12 @@ class DAppWebManage {
         return .ALL
     }
 
-    static func fetchScriptConfig() -> WKUserScriptConfig? {
-        let wallet = OKWalletManager.sharedInstance().currentWalletInfo
-        let address = wallet?.addr ?? ""
+    static func fetchScriptConfig(address: String = "") -> WKUserScriptConfig? {
+        var address = address
+        if address.isEmpty {
+            let wallet = OKWalletManager.sharedInstance().currentWalletInfo
+            address = wallet?.addr ?? ""
+        }
 //        return WKUserScriptConfig(
 //            address: address,
 //            chainId: 1,
