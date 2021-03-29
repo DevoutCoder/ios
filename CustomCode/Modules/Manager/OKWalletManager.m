@@ -339,7 +339,7 @@ static dispatch_once_t once;
     if ([coinType isEqualToString:COIN_BTC]) {
         return kWalletManager.currentBitcoinUnit;
     }else if ([kWalletManager isETHClassification:kWalletManager.currentWalletInfo.coinType]){
-        return [kWalletManager.currentWalletInfo.coinType uppercaseString];
+        return [kWalletManager getShowUICoinType:kWalletManager.currentWalletInfo.coinType];
     }else{
         return @"";
     }

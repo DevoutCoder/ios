@@ -261,7 +261,7 @@
         }else{
             [weakself.coinTypeBtn status:OKButtonStatusDisabled];
         }
-        if ([kWalletManager isETHClassification:weakself.coinType] && ![kWalletManager isETHClassification:weakself.coinTypeBtn.currentTitle]) {
+        if ([kWalletManager isETHClassification:weakself.coinType] && ![[kWalletManager getShowUICoinType:[weakself.coinType lowercaseString]] isEqualToString:weakself.coinTypeBtn.currentTitle]) {
             NSDictionary *tokenDict;
             for (NSDictionary *sub in tokensArray) {
                 NSString *coin = [sub safeStringForKey:@"coin"];
@@ -374,6 +374,9 @@
     }
     if (fee.length == 0 || fee == nil) {
         [kTools tipMessage:MyLocalizedString(@"Failed to get the rate", nil)];
+        return;
+    }
+    if ([weakself.balanceLabel.text isEqualToString:@"--"]) {
         return;
     }
     NSDecimalNumber *balanceNum = [NSDecimalNumber decimalNumberWithString:weakself.balanceLabel.text];

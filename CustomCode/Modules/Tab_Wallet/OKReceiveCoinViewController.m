@@ -75,7 +75,7 @@
     self.titleNavLabel.text = MyLocalizedString(@"ok collection", nil);
     NSString *typeStr = @"";
     if (self.tokenCoinType.length == 0 || self.tokenCoinType == nil) {
-        typeStr = [self.coinType uppercaseString];
+        typeStr = [[kWalletManager getShowUICoinType:self.coinType] uppercaseString];
     }else{
         typeStr = [self.tokenCoinType uppercaseString];
     }
