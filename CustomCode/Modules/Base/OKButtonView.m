@@ -17,9 +17,13 @@
 }
 
 - (void)click {
+    if (!self.disableHaptic) {
+        [kOKHaptic impactOccurredLight];
+    }
     if (self.buttonClick) {
         self.buttonClick();
     }
+    [kOKHaptic prepare];
 }
 
 - (void)setDisable:(BOOL)disable {

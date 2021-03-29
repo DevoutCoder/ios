@@ -73,5 +73,6 @@
 #import <SDWebImage/SDWebImage.h>
 #import "OKHelperUtils.h"
 #import <Bugly/Bugly.h>
+#import "OKHaptic.h"
 
 #endif /* OneKeyImport_h */

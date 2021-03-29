@@ -596,6 +596,8 @@
 		B0A8FFFF25E6261800513B8E /* UIColor+OKAppreance.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A8FFFD25E6261800513B8E /* UIColor+OKAppreance.m */; };
 		B0CA023925EE2D47002EAB56 /* OKAddTokenController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0CA023725EE2D47002EAB56 /* OKAddTokenController.h */; };
 		B0CA023A25EE2D47002EAB56 /* OKAddTokenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CA023825EE2D47002EAB56 /* OKAddTokenController.m */; };
+		B0D316FD2611C47500610EDF /* OKHaptic.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D316FB2611C47500610EDF /* OKHaptic.h */; };
+		B0D316FE2611C47500610EDF /* OKHaptic.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D316FC2611C47500610EDF /* OKHaptic.m */; };
 		B0E3FEC825EF4BA000BE4B7F /* OKAddTokenSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */; };
 		B0E3FEC925EF4BA000BE4B7F /* OKAddTokenSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */; };
 		B0E3FED725EF6B3700BE4B7F /* OKButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */; };
@@ -1292,6 +1294,8 @@
 		B0A8FFFD25E6261800513B8E /* UIColor+OKAppreance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+OKAppreance.m"; sourceTree = "<group>"; };
 		B0CA023725EE2D47002EAB56 /* OKAddTokenController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKAddTokenController.h; sourceTree = "<group>"; };
 		B0CA023825EE2D47002EAB56 /* OKAddTokenController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenController.m; sourceTree = "<group>"; };
+		B0D316FB2611C47500610EDF /* OKHaptic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKHaptic.h; sourceTree = "<group>"; };
+		B0D316FC2611C47500610EDF /* OKHaptic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKHaptic.m; sourceTree = "<group>"; };
 		B0D7435FBD7BF7C736F29F8F /* OKColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OKColors.h; path = ../CustomCode/OKColors.h; sourceTree = SOURCE_ROOT; };
 		B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKAddTokenSheet.h; sourceTree = "<group>"; };
 		B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenSheet.m; sourceTree = "<group>"; };
@@ -2631,6 +2635,8 @@
 		B0A8FFF725E625C700513B8E /* Appreance */ = {
 			isa = PBXGroup;
 			children = (
+				B0D316FB2611C47500610EDF /* OKHaptic.h */,
+				B0D316FC2611C47500610EDF /* OKHaptic.m */,
 				B0A8FFFC25E6261800513B8E /* UIColor+OKAppreance.h */,
 				B0A8FFFD25E6261800513B8E /* UIColor+OKAppreance.m */,
 				B0A8000025E6262700513B8E /* UIFont+OKAppreance.h */,
@@ -2914,6 +2920,7 @@
 				B058D8B425B55663000EB27C /* OKDeviceUpdateViewController.h in Headers */,
 				8814244D25B18EAA00961668 /* AESCrypt.h in Headers */,
 				8814256B25B18EAA00961668 /* OKSelectCellModel.h in Headers */,
+				B0D316FD2611C47500610EDF /* OKHaptic.h in Headers */,
 				881424D825B18EAA00961668 /* OKTradeSettingViewCellModel.h in Headers */,
 				881424A925B18EAA00961668 /* OKManagerHDViewController.h in Headers */,
 				D50C4AB38DB4B2AD6D02C262 /* UIButton+OneKey.h in Headers */,
@@ -3389,6 +3396,7 @@
 				8814250725B18EAA00961668 /* OKDefaultFeeInfoModel.m in Sources */,
 				B058D8BB25B55663000EB27C /* OKHardwareListBaseCell.m in Sources */,
 				8814257325B18EAA00961668 /* OKWalletListBottomBtn.m in Sources */,
+				B0D316FE2611C47500610EDF /* OKHaptic.m in Sources */,
 				CE326DEB260070DC00CA54E2 /* String.swift in Sources */,
 				8814251425B18EAA00961668 /* OKBottomCustomBtn.m in Sources */,
 				8814254025B18EAA00961668 /* OKScanView.m in Sources */,
