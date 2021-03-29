@@ -88,7 +88,7 @@ class OKTradeFeeViewController: PanModalViewController {
         custumFeeTitle.text = "The custom".localized
         custumFeeFoldTitle.text = "The custom".localized
         custunFeeGasTitle.text = "Gas Price (GWEI)"
-        custunFeeGasPriceTitle.text = "Gas"
+        custunFeeGasPriceTitle.text = "Gas Limit"
         setDefaultValue()
         custunFeeGasTextFiled.keyboardType = .numberPad
         custunFeeGasPriceTextFiled.keyboardType = .numberPad
