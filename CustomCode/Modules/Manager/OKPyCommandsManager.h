@@ -137,6 +137,7 @@
 #define kPyCommandsManager (OKPyCommandsManager.sharedInstance)
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^OKPYResultCallback)(id __nullable result);
+typedef void(^OKPYResultCallbackWithCache)(BOOL fromCache, id __nullable result);
 
 @interface OKPyCommandsManager : NSObject
 + (OKPyCommandsManager *)sharedInstance;
@@ -148,6 +149,7 @@ typedef void(^OKPYResultCallback)(id __nullable result);
 // callback will be dispatched to main queue.
 - (void)asyncCall:(NSString *)method parameter:(nullable NSDictionary *)parameter callback:(nullable OKPYResultCallback)callback;
 - (void)asyncCall:(NSString *)method parameter:(nullable NSDictionary *)parameter asyncCallback:(nullable OKPYResultCallback)callback;
+- (void)asyncCall:(NSString *)method parameter:(nullable NSDictionary *)parameter callbackWithCache:(nonnull OKPYResultCallbackWithCache)callback;
 @property (nonatomic,assign)PyObject *pyInstance;
 //硬件实例
 @property (nonatomic,assign)PyObject *pyHwInstance;

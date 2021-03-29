@@ -51,7 +51,7 @@
 
 - (void)loadListData {
     self.loadingIndicator.hidden = NO;
-    [kPyCommandsManager asyncCall:kInterface_get_all_wallet_balance parameter:@{} callback:^(id  _Nonnull result) {
+    [kPyCommandsManager asyncCall:kInterface_get_all_wallet_balance parameter:@{} callbackWithCache:^(BOOL fromCache, id _Nullable result) {
         NSDictionary *dict = result;
         NSString *all_balance = [dict safeStringForKey:@"all_balance"];
         NSArray *balanceArray = [all_balance componentsSeparatedByString:@" "];
@@ -64,7 +64,7 @@
         self.showList = [self.data copy];
         [self refreshFooterViewByCount:self.showList.count];
         [self.tableView reloadData];
-        self.loadingIndicator.hidden = YES;
+        self.loadingIndicator.hidden = !fromCache;
     }];
 }
 

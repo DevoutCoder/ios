@@ -18,6 +18,7 @@
 //硬件实例
 @property (nonatomic,assign)PyObject *pyHwClass;
 @property (nonatomic,strong)NSSet *noTipsInterface;
+@property (nonatomic,strong)NSCache *cache;
 @end
 
 @implementation OKPyCommandsManager
@@ -763,6 +764,23 @@ static dispatch_once_t once;
     });
 }
 
+- (void)asyncCall:method parameter:parameter callbackWithCache:(void(^)(BOOL fromCache, id result))callback {
+    if (!callback) { return; }
+    id cached = [self.cache objectForKey:method];
+    if (cached) {
+        callback(YES, cached);
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        id result = [self callInterface:method parameter:parameter];
+        if (result) {
+            [self.cache setObject:result forKey:method];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(NO, result);
+        });
+    });
+}
+
 - (void)asyncCall:(NSString *)method parameter:(NSDictionary *)parameter asyncCallback:(void(^)(id result))callback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         id result = [self callInterface:method parameter:parameter];
@@ -770,6 +788,13 @@ static dispatch_once_t once;
             callback(result);
         }
     });
+}
+
+- (NSCache *)cache {
+    if (!_cache) {
+        _cache = [[NSCache alloc] init];
+    }
+    return _cache;
 }
 
 - (NSSet *)noTipsInterface
