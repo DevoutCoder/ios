@@ -13,8 +13,8 @@ class DAppTransaction: NSObject {
     var from: String = ""
     var to: String = ""
     var value: Int = 0
-    var gas: Int?
-    var gasPrice: Int?
+    var gas: String?
+    var gasPrice: String?
     var data: String?
     var coin: String = ""
     var coinType: String = ""
@@ -23,8 +23,8 @@ class DAppTransaction: NSObject {
     init(from: String,
          to: String,
          value: Int,
-         gas: Int?,
-         gasPrice: Int?,
+         gas: String?,
+         gasPrice: String?,
          data: String?,
          coinType: String,
          nonce: Int?
@@ -46,11 +46,11 @@ class DAppTransaction: NSObject {
             "to" : to,
             "value" : value,
         ]
-        if let gas = gas {
-            map["gas"] = gas
+        if let gas = gas, let intValue = Int(gas) {
+            map["gas"] = intValue
         }
-        if let gasPrice = gasPrice {
-            map["gasPrice"] = gasPrice
+        if let gasPrice = gasPrice, let intValue = Int(gasPrice) {
+            map["gasPrice"] = intValue
         }
         if let nonce = nonce {
             map["nonce"] = nonce

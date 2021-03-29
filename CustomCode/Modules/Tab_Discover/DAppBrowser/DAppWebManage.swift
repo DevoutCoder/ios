@@ -400,8 +400,8 @@ class DAppWebManage {
         page.finishWithPassword = { (pwd, fee) in
             password = pwd
             if let fee = fee {
-                transaction.gasPrice = fee.gas_price.toInt
-                transaction.gas = fee.gas_limit.toInt
+                transaction.gasPrice = fee.gas_price.multiplyingEthereumUnit(type: .gwei).stringValue
+                transaction.gas = fee.gas_limit
             }
             group.leave()
         }

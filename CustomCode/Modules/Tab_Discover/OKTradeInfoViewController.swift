@@ -79,10 +79,6 @@ class OKTradeInfoViewController: PanModalViewController {
         let amount = String(transaction.value).divEthereumUnit().stringValue
         tokenCountLabel.text = amount + " " + tokenName
         tokenImageView.image = transaction.coinType.coinImage
-        if let gas = transaction.gas {
-            let value = gas.gweiToEther
-            updateGasValue(value: value)
-        }
     }
 
      func updateDefaultFeeInfo(model: OKDefaultFeeInfoModel) {

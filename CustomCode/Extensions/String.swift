@@ -15,20 +15,37 @@ extension String {
         return UIImage(named: "token_" + self.lowercased())
     }
 
-    func divEthereumUnit(type: EthereumUnit = .ether) -> NSDecimalNumber {
+    func divEthereumUnit(type: EthereumUnit = .ether, scale: Int16 = 6) -> NSDecimalNumber {
         guard !self.isEmpty else { return NSDecimalNumber(value: 0) }
         guard self != "0" else { return NSDecimalNumber(value: 0) }
         let value = NSDecimalNumber(string: self)
         let ratio = NSDecimalNumber(string: String(type.rawValue))
         let behavior = NSDecimalNumberHandler(
             roundingMode: .down,
-            scale: 6,
+            scale: scale,
             raiseOnExactness: false,
             raiseOnOverflow: false,
             raiseOnUnderflow: false,
             raiseOnDivideByZero: true
         )
         let result = value.dividing(by: ratio, withBehavior: behavior)
+        return result
+    }
+
+    func multiplyingEthereumUnit(type: EthereumUnit = .ether, scale: Int16 = 6) -> NSDecimalNumber {
+        guard !self.isEmpty else { return NSDecimalNumber(value: 0) }
+        guard self != "0" else { return NSDecimalNumber(value: 0) }
+        let value = NSDecimalNumber(string: self)
+        let ratio = NSDecimalNumber(string: String(type.rawValue))
+        let behavior = NSDecimalNumberHandler(
+            roundingMode: .down,
+            scale: scale,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: true
+        )
+        let result = value.multiplying(by: ratio, withBehavior: behavior)
         return result
     }
 
