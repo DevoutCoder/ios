@@ -155,7 +155,7 @@ DFUServiceDelegate, LoggerDelegate, DFUProgressDelegate>
     CBPeripheral *peripheral = kOKBlueManager.currentPeripheral;
     DFUFirmware *selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:zipUrl];
     DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:[kOKBlueManager centralManager] target:peripheral];
-    id _ = [initiator withFirmware:selectedFirmware];
+    [initiator withFirmware:selectedFirmware];
     initiator.delegate = self; // - to be informed about current state and errors
     initiator.logger = self;
     initiator.progressDelegate = self;

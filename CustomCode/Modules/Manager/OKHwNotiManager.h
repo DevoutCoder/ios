@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface OKHwNotiManager : NSObject
-+ (OKHwNotiManager *)sharedInstance;
++ (nullable OKHwNotiManager *)sharedInstance;
 @property (nonatomic,weak)id<OKHwNotiManagerDelegate> delegate;
 @end
 

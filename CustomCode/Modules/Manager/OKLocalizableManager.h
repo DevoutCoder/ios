@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OKLocalizableManager : NSObject
 @property (nonatomic) AppLanguageType languageType;
 @property (nonatomic, strong) NSBundle *languageBundle;
-+ (OKLocalizableManager *)sharedInstance;
++ (nullable OKLocalizableManager *)sharedInstance;
 + (NSString *)getCurrentLanguageString;
 + (AppLanguageType)getCurrentLanguageType;
 + (AppCurrentLanguage)getCurrentLanguage;

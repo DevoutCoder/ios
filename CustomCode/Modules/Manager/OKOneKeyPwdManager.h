@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OKOneKeyPwdManager : NSObject
-+ (OKOneKeyPwdManager *)sharedInstance;
++ (nullable OKOneKeyPwdManager *)sharedInstance;
 - (void)saveOneKeyPassWord:(NSString *)pwd;
 - (NSString *)getOneKeyPassWord;
 - (void)deleteOneKeyPwd;

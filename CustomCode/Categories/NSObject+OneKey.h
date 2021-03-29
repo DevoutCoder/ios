@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (OneKey)
-- (UINavigationController *)OK_NavigationController;
-- (UITabBarController *)OK_TabBarController;
+- (nullable UINavigationController *)OK_NavigationController;
+- (nullable UITabBarController *)OK_TabBarController;
 - (UIViewController*)OK_TopViewController;
 @end
 

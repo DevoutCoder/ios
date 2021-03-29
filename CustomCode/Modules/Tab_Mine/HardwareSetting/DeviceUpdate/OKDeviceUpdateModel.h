@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDict:(NSDictionary *)json;
 - (BOOL)bluetoothFirmwareNeedUpdate:(NSString *)currentVer;
 - (BOOL)systemFirmwareNeedUpdate:(NSString *)currentVer;
++ (NSString *)versionStringFromArray:(NSArray *)array;
 @end
 
 NS_ASSUME_NONNULL_END

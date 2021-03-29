@@ -18,10 +18,10 @@
 @implementation OKDeviceUpdateModel
 
 - (instancetype)initWithDict:(NSDictionary *)json {
-    if (self == [super init]) {
+    if (self = [super init]) {
         NSDictionary *stm32 = [json ok_objectForKeyPath:@"stm32"];
         NSArray *stm32Ver = [stm32 ok_objectForKeyPath:@"version"];
-        _systemFirmwareVersion = [self versionStringFromArray:stm32Ver];
+        _systemFirmwareVersion = [OKDeviceUpdateModel versionStringFromArray:stm32Ver];
         _systemFirmwareUrl = [stm32 safeStringForKey:@"url"];
         _systemFirmwareChangeLogEN = [stm32 safeStringForKey:@"changelog_en"];
         _systemFirmwareChangeLogCN = [stm32 safeStringForKey:@"changelog_cn"];
@@ -49,7 +49,7 @@
     return [self needUpdateWithCurrent:currentVer andLatest:self.systemFirmwareVersion];
 }
 
-- (NSString *)versionStringFromArray:(NSArray *)array {
++ (NSString *)versionStringFromArray:(NSArray *)array {
     NSMutableString *version = [[NSMutableString alloc] init];
     for (NSNumber *n in array) {
         [version appendFormat:@"%@.", n];

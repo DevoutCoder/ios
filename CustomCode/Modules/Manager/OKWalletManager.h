@@ -135,7 +135,7 @@ typedef enum{
 - (BOOL)checkWalletName:(NSString *)name;
 - (BOOL)checkIsHavePwd;
 - (BOOL)haveHDWallet;
-- (OKWalletInfoModel *)getCurrentWalletAddress:(NSString *)wallletName;
+- (nullable OKWalletInfoModel *)getCurrentWalletAddress:(NSString *)wallletName;
 - (NSString *)getUnitForCoinType;
 - (NSArray <OKWalletInfoModel *>*)listWallets;
 - (NSArray <OKWalletInfoModel *>*)listWalletsChainType:(OKWalletChainType)type;

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OKTokenNoResultView : UIView
 @property (nonatomic, copy) void(^addTokenCallback)(void);
-+ (instancetype)getView;
++ (nullable instancetype)getView;
 @end
 
 NS_ASSUME_NONNULL_END

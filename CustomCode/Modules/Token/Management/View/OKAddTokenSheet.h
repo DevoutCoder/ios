@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^addTokenCallback)(void);
 @property (nonatomic, copy) void(^cancel)(void);
 @property (nonatomic, strong) OKToken *token;
-+ (instancetype)getView;
++ (nullable instancetype)getView;
 @end
 
 NS_ASSUME_NONNULL_END

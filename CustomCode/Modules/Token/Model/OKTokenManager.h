@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <OKToken *>*customTokens;
 @property (nonatomic, strong) NSArray <NSString *>*currentAddress;
 
-+ (OKTokenManager *)sharedInstance;
++ (nullable OKTokenManager *)sharedInstance;
 
 - (void)updateTokenList; // 更新大列表
 - (void)addToken:(OKToken *)token;
