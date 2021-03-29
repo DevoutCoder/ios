@@ -93,7 +93,9 @@ class OKTradeInfoViewController: PanModalViewController {
     }
 
     private func updateGasValue(value: String) {
-        gasActivity.stopAnimating()
+        if gasActivity.isAnimating {
+            gasActivity.stopAnimating()
+        }
         payGasContentLabel.text = value + " "
             + (transaction?.coinType.uppercased().chainNameToTokenName() ?? "")
     }

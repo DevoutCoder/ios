@@ -132,6 +132,10 @@ extension String {
         return !isEmpty
     }
 
+    var isNaN: Bool {
+        return  self == "NaN"
+    }
+
 }
 
 extension String {

@@ -74,12 +74,11 @@ class DAppWebManage {
             let wallet = OKWalletManager.sharedInstance().currentWalletInfo
             address = wallet?.addr ?? ""
         }
+//        let config: DappRPCConfig = .BSCTestnet
 //        return WKUserScriptConfig(
 //            address: address,
-//            chainId: 1,
-//            rpcUrl: "https://mainnet.infura.io/v3/6e822818ec644335be6f0ed231f48310",
-//            chainId: 3,
-//            rpcUrl: "https://ropsten.infura.io/v3/f911e0056b6845e2b71419434c5f08a8",
+//            chainId: config.rpcUrlInfo.1,
+//            rpcUrl: config.rpcUrlInfo.0,
 //            privacyMode: false
 //        )
         let result = OKPyCommandsManager.sharedInstance().callInterface(OKSwiftHelper.dapp_eth_rpc_info(), parameter: nil) as? [String : Any]
@@ -385,7 +384,7 @@ class DAppWebManage {
             group.enter()
             let amount = String(transaction.value).divEthereumUnit().stringValue
             OKHelperUtils.getDefaultFeeInfoCoinType(
-                wallet.coinType,
+                wallet.coinType.lowercased(),
                 toAddress: to,
                 amount: amount,
                 data: data,

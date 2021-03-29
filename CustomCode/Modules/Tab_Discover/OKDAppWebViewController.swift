@@ -113,6 +113,7 @@ final class OKDAppWebViewController: ViewController {
         if let wallet = OKWalletManager.sharedInstance().currentWalletInfo {
             accountName.text = wallet.addr.addressName
             tokenImage.image = wallet.coinType.coinImage
+            address = wallet.addr
         }
 
         updateWebViewCanGoBack(flag: false)

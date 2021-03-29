@@ -175,7 +175,9 @@ class OKTradeFeeViewController: PanModalViewController {
 
         let gasLimit = NSDecimalNumber(string: model.normal.gas_limit)
         let gasPrice = NSDecimalNumber(string: model.normal.gas_price)
-        allValue = gasLimit.multiplying(by: gasPrice)
+        if !gasLimit.stringValue.isNaN, !gasLimit.stringValue.isNaN {
+            allValue = gasLimit.multiplying(by: gasPrice, withBehavior: behavior())
+        }
         perTime = NSDecimalNumber(string: model.normal.time)
         perRmb = NSDecimalNumber(string:  model.normal.fiat.split(" ").first ?? "0")
         perFee = NSDecimalNumber(string: model.normal.fee)
@@ -277,7 +279,6 @@ class OKTradeFeeViewController: PanModalViewController {
            let gas = custunFeeGasTextFiled.text, !gas.isEmpty,
            let allValue = allValue, let perTime = perTime, let perRmb = perRmb,  let perFee = perFee
         {
-
             let gasLimitDecimalNumber = NSDecimalNumber(string:gas)
             let gasPriceDecimalNumber = NSDecimalNumber(string: gasPrice)
             if gasLimitDecimalNumber.floatValue < (Float(model.normal.gas_limit) ?? 0) {
@@ -304,19 +305,14 @@ class OKTradeFeeViewController: PanModalViewController {
             if gasPrice == "0" || gas == "0" {
                 return
             }
-
-            func behavior(scale: Int16) -> NSDecimalNumberHandler {
-                return NSDecimalNumberHandler(
-                    roundingMode: .down,
-                    scale: scale,
-                    raiseOnExactness: false,
-                    raiseOnOverflow: false,
-                    raiseOnUnderflow: false,
-                    raiseOnDivideByZero: true
-                )
+            if allValue.stringValue == "0" {
+                return
             }
-            let ratio = gasLimitDecimalNumber.multiplying(by: gasPriceDecimalNumber).dividing(by: allValue)
-            let time =  NSDecimalNumber(string:"1").dividing(by: ratio).multiplying(by: perTime, withBehavior: behavior(scale: 0)).intValue
+            let ratio = gasLimitDecimalNumber.multiplying(by: gasPriceDecimalNumber, withBehavior: behavior()).dividing(by: allValue, withBehavior: behavior())
+            if ratio.stringValue == "0" {
+                return
+            }
+            let time =  NSDecimalNumber(string:"1").dividing(by: ratio, withBehavior: behavior()).multiplying(by: perTime, withBehavior: behavior(scale: 0)).intValue
             let rmb = ratio.multiplying(by: perRmb, withBehavior: behavior(scale: 2)).stringValue
             let fee = ratio.multiplying(by: perFee, withBehavior: behavior(scale: 9)).stringValue
             custumFeeTime.text =  "About 0 minutes".localized.replacingOccurrences(of: "0", with: " \(time) ")
@@ -334,6 +330,17 @@ class OKTradeFeeViewController: PanModalViewController {
 
     private func tokenName() -> String {
         return OKWalletManager.sharedInstance().currentWalletInfo?.coinType.chainNameToTokenName() ?? ""
+    }
+
+    private func behavior(scale: Int16 = 20) -> NSDecimalNumberHandler {
+        return NSDecimalNumberHandler(
+            roundingMode: .down,
+            scale: scale,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: true
+        )
     }
 }
 

@@ -484,6 +484,7 @@
 		88EBC4D0260F879B00C6A538 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBC4CF260F879B00C6A538 /* Array.swift */; };
 		88EBC4D4260FAE6C00C6A538 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBC4D3260FAE6C00C6A538 /* UIScrollView.swift */; };
 		88EBC4DA2610CEC600C6A538 /* ScriptMessageProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBC4D92610CEC600C6A538 /* ScriptMessageProxy.swift */; };
+		88EBC4E026122E9000C6A538 /* DappRPCConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBC4DF26122E9000C6A538 /* DappRPCConfig.swift */; };
 		88F80BF425F72C480095954F /* OKTokenAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 88F80BF225F72C480095954F /* OKTokenAssetModel.h */; };
 		88F80BF525F72C480095954F /* OKTokenAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F80BF325F72C480095954F /* OKTokenAssetModel.m */; };
 		88F89FBE25CB9E4700EFC641 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 88F89FBC25CB9E4700EFC641 /* Localizable.strings */; };
@@ -1180,6 +1181,7 @@
 		88EBC4CF260F879B00C6A538 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		88EBC4D3260FAE6C00C6A538 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		88EBC4D92610CEC600C6A538 /* ScriptMessageProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageProxy.swift; sourceTree = "<group>"; };
+		88EBC4DF26122E9000C6A538 /* DappRPCConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappRPCConfig.swift; sourceTree = "<group>"; };
 		88F80BF225F72C480095954F /* OKTokenAssetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKTokenAssetModel.h; sourceTree = "<group>"; };
 		88F80BF325F72C480095954F /* OKTokenAssetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKTokenAssetModel.m; sourceTree = "<group>"; };
 		88F89FBD25CB9E4700EFC641 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -2408,6 +2410,7 @@
 				88FAC50025F6739F0019CFF6 /* WKUserScriptConfig.swift */,
 				88FAC50125F673A00019CFF6 /* WKWebView+Extensions.swift */,
 				CE326E092601DE8B00CA54E2 /* DAppWebManage.swift */,
+				88EBC4DF26122E9000C6A538 /* DappRPCConfig.swift */,
 			);
 			path = DAppBrowser;
 			sourceTree = "<group>";
@@ -3307,6 +3310,7 @@
 				882F8B5325F749FF004099D7 /* OKNotiAssetModel.m in Sources */,
 				881425FA25B9216700961668 /* OKSpecialEquipmentViewController.m in Sources */,
 				881424CE25B18EAA00961668 /* OKTheMarketViewController.m in Sources */,
+				88EBC4E026122E9000C6A538 /* DappRPCConfig.swift in Sources */,
 				CED40A612604CC690095D600 /* Bundle.swift in Sources */,
 				8814244925B18EAA00961668 /* AESCrypt.m in Sources */,
 				8814251525B18EAA00961668 /* OKWalletInputFeeView.m in Sources */,
