@@ -405,7 +405,7 @@
         }else{
             weakself.selectedToken = nil;
         }
-        [weakself.coinTypeBtn setTitle:selected.coin forState:UIControlStateNormal];
+        [weakself.coinTypeBtn setTitle:[selected.coin uppercaseString] forState:UIControlStateNormal];
         weakself.balanceLabel.text =  selected.balance;
         weakself.coinTypeLabel.text = [selected.coin uppercaseString];
         [weakself getNoDataRates];

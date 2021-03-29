@@ -463,7 +463,7 @@ static dispatch_once_t once;
         fieldNum = (int)strtoul([fieldStr UTF8String],0,16);
     }
     if (fieldNum + kHEAD_LENGTH == self.buffer.length / 2) {
-        NSLog(@"self.currentReadDataStr = %@",self.currentReadDataStr);
+        NSLog(@"self.buffer = %@",self.buffer);
         [kPyCommandsManager callInterface:kInterface_set_response parameter:@{@"data": [self.buffer copy]}];
         [self.buffer setString:@""];
     }

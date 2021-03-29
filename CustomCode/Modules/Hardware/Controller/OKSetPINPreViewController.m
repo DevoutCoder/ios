@@ -41,6 +41,10 @@
 
 
 - (IBAction)nextBtnClick:(UIButton *)sender {
+    OKWeakSelf(self)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD showHUDAddedTo:weakself.view animated:YES];
+    });
     kHwNotiManager.delegate = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         id result =  [kPyCommandsManager callInterface:kInterfacereset_pin parameter:@{}];
@@ -58,6 +62,7 @@
     OKWeakSelf(self)
     if (OKHWNotiTypePin_New_First == type) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:weakself.view animated:YES];
             OKPINCodeViewController *pinCode = [OKPINCodeViewController PINCodeViewController:^(NSString * _Nonnull pin) {
                 NSLog(@"pinCode = %@",pin);
                 [MBProgressHUD showHUDAddedTo:weakself.view animated:YES];

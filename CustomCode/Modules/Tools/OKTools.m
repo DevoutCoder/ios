@@ -304,7 +304,7 @@
 {
     UIView *view = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.userInteractionEnabled = NO;
+    hud.userInteractionEnabled = YES;
     hud.mode = MBProgressHUDModeText;
     hud.label.text = msg;
     hud.label.textColor = [UIColor whiteColor];

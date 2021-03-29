@@ -29,7 +29,14 @@
     self.title = MyLocalizedString(@"Legal tender units", nil);
     self.tableView.tableFooterView = [UIView new];
     
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     self.allData = kWalletManager.supportFiatArray;
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource

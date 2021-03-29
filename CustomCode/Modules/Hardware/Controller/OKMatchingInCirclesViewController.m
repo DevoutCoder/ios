@@ -98,6 +98,7 @@
                 }];
             }else{
                 if ([kOKBlueManager isConnectedName:model.deviceInfo.ble_name] && kOKBlueManager.currentDeviceID != nil) {
+                    [weakself getFeature];
                     NSDictionary *dict = [[[OKDevicesManager sharedInstance]getDeviceModelWithID:kOKBlueManager.currentDeviceID]json];
                     [self subscribeComplete:dict characteristic:nil];
                 }else{
@@ -168,6 +169,7 @@
         OKPeripheralInfo *peripheralInfo = self.dataSource[indexPath.row];
         OKWeakSelf(self)
         if ([kOKBlueManager isConnectedCurrentDevice] && [kOKBlueManager.currentPeripheral.name isEqualToString:peripheralInfo.peripheral.name]) {
+            [weakself getFeature];
             NSDictionary *dict = [[[OKDevicesManager sharedInstance]getDeviceModelWithID:kOKBlueManager.currentDeviceID]json];
             if ([kOKBlueManager isBluetoothLowVersion]) {
                 [weakself subscribeComplete:dict characteristic:kOKBlueManager.deviceCharacteristic];
@@ -180,6 +182,18 @@
         }
     });
 }
+
+- (void)getFeature
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSDictionary *jsonDict =  [kPyCommandsManager callInterface:kInterfaceget_feature parameter:@{@"path":kBluetooth_iOS}];
+        if (jsonDict != nil) {
+            OKDeviceModel *deviceModel  = [[OKDeviceModel alloc]initWithJson:jsonDict];
+            [[OKDevicesManager sharedInstance]addDevices:deviceModel];
+        }
+    });
+}
+
 - (void)refreshBtnClick
 {
     [kOKBlueManager stopScanPeripheral];
