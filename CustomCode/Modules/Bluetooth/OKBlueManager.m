@@ -203,18 +203,20 @@ static dispatch_once_t once;
     }];
 
     // 设置读取Descriptor的委托
+    OKWeakSelf(self)
     [self.babyBluetooth setBlockOnReadValueForDescriptors:^(CBPeripheral *peripheral, CBDescriptor *descriptor, NSError *error) {
-        NSLog(@"descriptor %@",descriptor);
+        if ([descriptor.value boolValue]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 从block中取到值，再回到主线程
+                if ([weakSelf respondsToSelector:@selector(subscribeToComplete:)]) {
+                    [weakSelf subscribeToComplete:weakself.readCharacteristic];
+                }
+            });
+        }
     }];
 
-
     [self.babyBluetooth setBlockOnDidUpdateNotificationStateForCharacteristic:^(CBCharacteristic *characteristic, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // 从block中取到值，再回到主线程
-            if ([weakSelf respondsToSelector:@selector(subscribeToComplete:)]) {
-                [weakSelf subscribeToComplete:characteristic];
-            }
-        });
+
     }];
 
 
