@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+  - repo: https://github.com/doublify/pre-commit-clang-format
+    rev: 62302476d0da01515660132d76902359bed0f782
+    hooks:
+      - id: clang-format
