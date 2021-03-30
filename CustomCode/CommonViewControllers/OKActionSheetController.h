@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface OKActionSheetController : UIViewController
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *titleText;
 @property (nonatomic, strong) NSArray <NSString *> *entries;
 @property (nonatomic, copy) void(^callback)(BOOL cancel, NSInteger index);
 

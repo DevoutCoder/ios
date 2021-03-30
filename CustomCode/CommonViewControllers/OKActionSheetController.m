@@ -41,7 +41,7 @@ static const NSInteger cancelIndex = -1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tipLabel.text = self.title;
+    self.tipLabel.text = self.titleText;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableViewHeight.constant = cellHeight * self.entries.count;
@@ -69,6 +69,7 @@ static const NSInteger cancelIndex = -1;
     }];
 }
 
+#pragma mark - UITableViewDelegate & UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return cellHeight;
 }
@@ -78,9 +79,7 @@ static const NSInteger cancelIndex = -1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ID = @"OKActionSheetCell";
-    OKActionSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    cell = cell ?: [[OKActionSheetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    OKActionSheetCell *cell = [OKActionSheetCell ok_dequeueFrom:tableView];
     cell.text = self.entries[indexPath.row];
     return cell;
 }

@@ -53,6 +53,11 @@
     [paragraphStyle setLineSpacing:lineSpacing];
     return attributedString;
 }
+
+- (NSMutableAttributedString *)ok_lineSpacing:(CGFloat)lineSpacing {
+    return [NSString lineSpacing:lineSpacing content:self];
+}
+
 //根据宽度求高度  content 计算的内容  width 计算的宽度 font字体大小
 - (CGFloat)getLabelHeightWithWidth:(CGFloat)width font: (CGFloat)font
 {

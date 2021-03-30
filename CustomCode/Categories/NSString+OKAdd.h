@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(const char *)ok_stringToChar:(NSString *)string;
 +(NSString *)ok_charToString:(const char *)cString;
 + (NSMutableAttributedString *)lineSpacing:(CGFloat)lineSpacing content:(NSString *)content;
+- (NSMutableAttributedString *)ok_lineSpacing:(CGFloat)lineSpacing;
+
 - (NSString *)SHA256;
 //根据宽度求高度  content 计算的内容  width 计算的宽度 font字体大小
 - (CGFloat)getLabelHeightWithWidth:(CGFloat)width font: (CGFloat)font;

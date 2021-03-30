@@ -602,6 +602,10 @@
 		B0D317002611F24200610EDF /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D316FF2611F24200610EDF /* Common.storyboard */; };
 		B0D317042611F29100610EDF /* OKActionSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D317022611F29100610EDF /* OKActionSheetController.h */; };
 		B0D317052611F29100610EDF /* OKActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D317032611F29100610EDF /* OKActionSheetController.m */; };
+		B0DC0FC82613294600DE7F46 /* OKBasicTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0DC0FC62613294600DE7F46 /* OKBasicTableViewController.h */; };
+		B0DC0FC92613294600DE7F46 /* OKBasicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DC0FC72613294600DE7F46 /* OKBasicTableViewController.m */; };
+		B0E0F8982613354500E72530 /* UITableViewCell+OKCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E0F8962613354500E72530 /* UITableViewCell+OKCommon.h */; };
+		B0E0F8992613354500E72530 /* UITableViewCell+OKCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E0F8972613354500E72530 /* UITableViewCell+OKCommon.m */; };
 		B0E3FEC825EF4BA000BE4B7F /* OKAddTokenSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */; };
 		B0E3FEC925EF4BA000BE4B7F /* OKAddTokenSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */; };
 		B0E3FED725EF6B3700BE4B7F /* OKButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */; };
@@ -1305,6 +1309,11 @@
 		B0D317022611F29100610EDF /* OKActionSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKActionSheetController.h; sourceTree = "<group>"; };
 		B0D317032611F29100610EDF /* OKActionSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKActionSheetController.m; sourceTree = "<group>"; };
 		B0D7435FBD7BF7C736F29F8F /* OKColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OKColors.h; path = ../CustomCode/OKColors.h; sourceTree = SOURCE_ROOT; };
+		B0DC0FC62613294600DE7F46 /* OKBasicTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKBasicTableViewController.h; sourceTree = "<group>"; };
+		B0DC0FC72613294600DE7F46 /* OKBasicTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKBasicTableViewController.m; sourceTree = "<group>"; };
+		B0E0F8962613354500E72530 /* UITableViewCell+OKCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+OKCommon.h"; sourceTree = "<group>"; };
+		B0E0F8972613354500E72530 /* UITableViewCell+OKCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+OKCommon.m"; sourceTree = "<group>"; };
+		B0E0F89A2613370300E72530 /* OKCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKCommonHeader.h; sourceTree = "<group>"; };
 		B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKAddTokenSheet.h; sourceTree = "<group>"; };
 		B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenSheet.m; sourceTree = "<group>"; };
 		B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKButtonView.h; sourceTree = "<group>"; };
@@ -2659,11 +2668,24 @@
 		B0D317012611F26100610EDF /* CommonViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B0E0F89A2613370300E72530 /* OKCommonHeader.h */,
 				B0D316FF2611F24200610EDF /* Common.storyboard */,
+				B0E0F8952613351C00E72530 /* Views */,
 				B0D317022611F29100610EDF /* OKActionSheetController.h */,
 				B0D317032611F29100610EDF /* OKActionSheetController.m */,
+				B0DC0FC62613294600DE7F46 /* OKBasicTableViewController.h */,
+				B0DC0FC72613294600DE7F46 /* OKBasicTableViewController.m */,
 			);
 			path = CommonViewControllers;
+			sourceTree = "<group>";
+		};
+		B0E0F8952613351C00E72530 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B0E0F8962613354500E72530 /* UITableViewCell+OKCommon.h */,
+				B0E0F8972613354500E72530 /* UITableViewCell+OKCommon.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CBB14A08A299E78F0950E8FA /* CustomCode */ = {
@@ -2860,6 +2882,7 @@
 				012E453087E1DC1384026B99 /* UIView+YCExtension.h in Headers */,
 				8814244B25B18EAA00961668 /* NSData+CommonCrypto.h in Headers */,
 				8814246D25B18EAA00961668 /* OKSignatureViewController.h in Headers */,
+				B0DC0FC82613294600DE7F46 /* OKBasicTableViewController.h in Headers */,
 				8814249E25B18EAA00961668 /* OKFiatSelectViewController.h in Headers */,
 				8864AEB425E6081100459C4E /* OKSelectAssetTypeTableViewCell.h in Headers */,
 				50E24DA7AD1AAF4349C67138 /* UILabel+OneKey.h in Headers */,
@@ -2916,6 +2939,7 @@
 				B0A8FFEC25E4F60E00513B8E /* OKTokenManagementController.h in Headers */,
 				8814249025B18EAA00961668 /* qrspec.h in Headers */,
 				B08CCEA225E118DE003D12E8 /* OKCSViewController.h in Headers */,
+				B0E0F8982613354500E72530 /* UITableViewCell+OKCommon.h in Headers */,
 				8814252D25B18EAA00961668 /* OKDocument.h in Headers */,
 				8814248625B18EAA00961668 /* SegmentPageHead.h in Headers */,
 				8814249A25B18EAA00961668 /* split.h in Headers */,
@@ -3457,6 +3481,7 @@
 				881424D225B18EAA00961668 /* OKTradeSettingViewCellModel.m in Sources */,
 				881424A725B18EAA00961668 /* OKLanguageViewController.m in Sources */,
 				97B84B989EEFF9FA6E446899 /* UIView+Helper.m in Sources */,
+				B0DC0FC92613294600DE7F46 /* OKBasicTableViewController.m in Sources */,
 				8814259425B18EAA00961668 /* OKLabel.m in Sources */,
 				B01CB1D525C12F9A0099F931 /* WKWebView+Bypass.m in Sources */,
 				888C9D3F260A544200EB4978 /* UIImageView.swift in Sources */,
@@ -3489,6 +3514,7 @@
 				881425A625B2E44100961668 /* OKDeviceReadyToStartViewController.m in Sources */,
 				8814255625B18EAA00961668 /* OKWordCheckViewController.m in Sources */,
 				88EBC4D4260FAE6C00C6A538 /* UIScrollView.swift in Sources */,
+				B0E0F8992613354500E72530 /* UITableViewCell+OKCommon.m in Sources */,
 				BEA2428F980CDB93F6B81AB8 /* UIView+Toast.m in Sources */,
 				B000CA6D25F0EF58007B3985 /* OKAllAssetsCellModel.m in Sources */,
 				8814247925B18EAA00961668 /* JSBUtil.m in Sources */,
