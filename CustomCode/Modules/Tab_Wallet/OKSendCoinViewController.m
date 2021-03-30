@@ -402,12 +402,14 @@
     tokenSelectVc.selectCallback = ^(OKAllAssetsCellModel * _Nonnull selected) {
         if (selected.isNativeToken == NO) {
             weakself.selectedToken = selected;
+            [weakself.coinTypeBtn setTitle:[selected.coin uppercaseString] forState:UIControlStateNormal];
+            weakself.coinTypeLabel.text = [selected.coin uppercaseString];
         }else{
             weakself.selectedToken = nil;
+            [weakself.coinTypeBtn setTitle:[kWalletManager getShowUICoinType:selected.coin] forState:UIControlStateNormal];
+            weakself.coinTypeLabel.text = [kWalletManager getShowUICoinType:selected.coin];
         }
-        [weakself.coinTypeBtn setTitle:[selected.coin uppercaseString] forState:UIControlStateNormal];
         weakself.balanceLabel.text =  selected.balance;
-        weakself.coinTypeLabel.text = [selected.coin uppercaseString];
         [weakself getNoDataRates];
         [weakself.navigationController popViewControllerAnimated:YES];
     };

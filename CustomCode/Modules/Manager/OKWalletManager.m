@@ -402,7 +402,7 @@ static dispatch_once_t once;
     if (coinType.length == 0 || coinType == nil) {
         coin = self.currentWalletInfo.coinType;
     }
-    NSString *showCoin = [self.unitIsDifferentDict safeStringForKey:coin];
+    NSString *showCoin = [self.unitIsDifferentDict safeStringForKey:[coin lowercaseString]];
     return showCoin.length>0?[showCoin uppercaseString]:[coinType uppercaseString];
 }
 

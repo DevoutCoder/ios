@@ -87,16 +87,17 @@
 }
 - (NSArray *)allData
 {
-    OKTradeSettingViewCellModel *model1 = [[OKTradeSettingViewCellModel alloc]init];
-    model1.titleStr = MyLocalizedString(@"Use RBF (trade substitution)", nil);
-    model1.switchOn = kUserSettingManager.rbfFlag;
-    model1.index = 0;
+//    OKTradeSettingViewCellModel *model1 = [[OKTradeSettingViewCellModel alloc]init];
+//    model1.titleStr = MyLocalizedString(@"Use RBF (trade substitution)", nil);
+//    model1.switchOn = kUserSettingManager.rbfFlag;
+//    model1.index = 0;
     
     OKTradeSettingViewCellModel *model2 = [[OKTradeSettingViewCellModel alloc]init];
     model2.titleStr = MyLocalizedString(@"Spend unrecognized income", nil);
     model2.switchOn = kUserSettingManager.unconfFlag;
     model2.index = 1;
-    _allData = @[model1,model2];
+//    _allData = @[model1,model2];
+    _allData = @[model2];
     
     return _allData;
 }

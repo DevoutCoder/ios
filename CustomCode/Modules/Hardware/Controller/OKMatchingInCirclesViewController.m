@@ -98,7 +98,6 @@
                 }];
             }else{
                 if ([kOKBlueManager isConnectedName:model.deviceInfo.ble_name] && kOKBlueManager.currentDeviceID != nil) {
-                    [weakself getFeature];
                     NSDictionary *dict = [[[OKDevicesManager sharedInstance]getDeviceModelWithID:kOKBlueManager.currentDeviceID]json];
                     [self subscribeComplete:dict characteristic:nil];
                 }else{
@@ -169,7 +168,6 @@
         OKPeripheralInfo *peripheralInfo = self.dataSource[indexPath.row];
         OKWeakSelf(self)
         if ([kOKBlueManager isConnectedCurrentDevice] && [kOKBlueManager.currentPeripheral.name isEqualToString:peripheralInfo.peripheral.name]) {
-            [weakself getFeature];
             NSDictionary *dict = [[[OKDevicesManager sharedInstance]getDeviceModelWithID:kOKBlueManager.currentDeviceID]json];
             if ([kOKBlueManager isBluetoothLowVersion]) {
                 [weakself subscribeComplete:dict characteristic:kOKBlueManager.deviceCharacteristic];
@@ -179,17 +177,6 @@
         }else{
             [kOKBlueManager disconnectAllPeripherals];
             [kOKBlueManager connectPeripheral:peripheralInfo.peripheral];
-        }
-    });
-}
-
-- (void)getFeature
-{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSDictionary *jsonDict =  [kPyCommandsManager callInterface:kInterfaceget_feature parameter:@{@"path":kBluetooth_iOS}];
-        if (jsonDict != nil) {
-            OKDeviceModel *deviceModel  = [[OKDeviceModel alloc]initWithJson:jsonDict];
-            [[OKDevicesManager sharedInstance]addDevices:deviceModel];
         }
     });
 }
@@ -252,8 +239,6 @@
 
 
 - (void)getScanResultPeripherals:(NSArray *)peripheralInfoArr {
-    NSLog(@"peripheralInfoArr == %@",peripheralInfoArr);
-
     OKWeakSelf(self)
     // 这里获取到扫描到的蓝牙外设数组、添加至数据源中
     if (self.dataSource.count>0) {

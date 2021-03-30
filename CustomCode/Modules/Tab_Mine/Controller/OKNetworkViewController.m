@@ -44,10 +44,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(userSetingEthBComplete) name:kUserSetingEthBComplete object:nil];
     [self userSetingEthBComplete];
 
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(userSetingMarketSource) name:kUserSetingMarketSource object:nil];
-    [self userSetingMarketSource];
-
-
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(userSetingElectrumServer) name:kUserSetingElectrumServer object:nil];
     [self userSetingElectrumServer];
 }
@@ -63,29 +59,23 @@
             break;
         case 3:
         {
-            OKTheMarketViewController *theMarketVc = [OKTheMarketViewController theMarketViewController];
-            [self.navigationController pushViewController:theMarketVc animated:YES];
-        }
-            break;
-        case 5:
-        {
             OKBrowserBTCTableViewController *browserBTC = [OKBrowserBTCTableViewController browserBTCTableViewController];
             [self.navigationController pushViewController:browserBTC animated:YES];
         }
             break;
-        case 7:
+        case 5:
         {
             OKBrowserETHTableViewController *browserETH = [OKBrowserETHTableViewController browserETHTableViewController];
             [self.navigationController pushViewController:browserETH animated:YES];
         }
             break;
-        case 9:
+        case 7:
         {
             OKElectrumNodeViewController *electrumNodeVc = [OKElectrumNodeViewController electrumNodeViewController];
             [self.navigationController pushViewController:electrumNodeVc animated:YES];
         }
             break;
-        case 11:
+        case 9:
         {
             OKProxyServerTableViewController *proxyServerVc = [OKProxyServerTableViewController proxyServerTableViewController];
             [self.navigationController pushViewController:proxyServerVc animated:YES];
@@ -94,11 +84,6 @@
         default:
             break;
     }
-}
-
-- (void)userSetingMarketSource
-{
-    self.marketLabel.text = kUserSettingManager.currentMarketSource;
 }
 
 - (void)userSetingSysServerComplete
