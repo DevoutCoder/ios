@@ -74,5 +74,6 @@
 #import "OKHelperUtils.h"
 #import <Bugly/Bugly.h>
 #import "OKHaptic.h"
+#import "OKActionSheetController.h"
 
 #endif /* OneKeyImport_h */

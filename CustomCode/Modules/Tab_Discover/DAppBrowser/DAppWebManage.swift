@@ -227,7 +227,7 @@ class DAppWebManage {
                     page.walletChangedCallback = { _ in
                         self.handleOpenDApp(model: model, callBackClick: callBackClick)
                     }
-                    page.modalPresentationStyle = .overCurrentContext
+                    page.modalPresentationStyle = .overFullScreen
                     OKTools.ok_TopViewController().present(page, animated: false, completion: nil)
                 })
             )

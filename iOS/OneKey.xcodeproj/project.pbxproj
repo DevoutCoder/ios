@@ -599,6 +599,9 @@
 		B0CA023A25EE2D47002EAB56 /* OKAddTokenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CA023825EE2D47002EAB56 /* OKAddTokenController.m */; };
 		B0D316FD2611C47500610EDF /* OKHaptic.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D316FB2611C47500610EDF /* OKHaptic.h */; };
 		B0D316FE2611C47500610EDF /* OKHaptic.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D316FC2611C47500610EDF /* OKHaptic.m */; };
+		B0D317002611F24200610EDF /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D316FF2611F24200610EDF /* Common.storyboard */; };
+		B0D317042611F29100610EDF /* OKActionSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D317022611F29100610EDF /* OKActionSheetController.h */; };
+		B0D317052611F29100610EDF /* OKActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D317032611F29100610EDF /* OKActionSheetController.m */; };
 		B0E3FEC825EF4BA000BE4B7F /* OKAddTokenSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */; };
 		B0E3FEC925EF4BA000BE4B7F /* OKAddTokenSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */; };
 		B0E3FED725EF6B3700BE4B7F /* OKButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */; };
@@ -1298,6 +1301,9 @@
 		B0CA023825EE2D47002EAB56 /* OKAddTokenController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenController.m; sourceTree = "<group>"; };
 		B0D316FB2611C47500610EDF /* OKHaptic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKHaptic.h; sourceTree = "<group>"; };
 		B0D316FC2611C47500610EDF /* OKHaptic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKHaptic.m; sourceTree = "<group>"; };
+		B0D316FF2611F24200610EDF /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
+		B0D317022611F29100610EDF /* OKActionSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKActionSheetController.h; sourceTree = "<group>"; };
+		B0D317032611F29100610EDF /* OKActionSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKActionSheetController.m; sourceTree = "<group>"; };
 		B0D7435FBD7BF7C736F29F8F /* OKColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OKColors.h; path = ../CustomCode/OKColors.h; sourceTree = SOURCE_ROOT; };
 		B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKAddTokenSheet.h; sourceTree = "<group>"; };
 		B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenSheet.m; sourceTree = "<group>"; };
@@ -2650,6 +2656,16 @@
 			path = Appreance;
 			sourceTree = "<group>";
 		};
+		B0D317012611F26100610EDF /* CommonViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B0D316FF2611F24200610EDF /* Common.storyboard */,
+				B0D317022611F29100610EDF /* OKActionSheetController.h */,
+				B0D317032611F29100610EDF /* OKActionSheetController.m */,
+			);
+			path = CommonViewControllers;
+			sourceTree = "<group>";
+		};
 		CBB14A08A299E78F0950E8FA /* CustomCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -2657,6 +2673,7 @@
 				8814228525B18EA900961668 /* Modules */,
 				59A544C0AFB5DBAF4A4C8EEB /* Notification.h */,
 				5E4F455E95D3B43D3A094929 /* AppDelegate.h */,
+				B0D317012611F26100610EDF /* CommonViewControllers */,
 				897B470BBDFF6189764A28B1 /* CommonView */,
 				557E4A389FE9AA72CB44E5B1 /* OKComMarco.h */,
 				D8AF435680E41DF1C6BC56E7 /* OneKeyDefine.h */,
@@ -2827,6 +2844,7 @@
 				B29C483197B6698004570F27 /* OKNSObject.h in Headers */,
 				8814255F25B18EAA00961668 /* OKCheckWordView.h in Headers */,
 				881424EF25B18EAA00961668 /* OKDeleteWalletConfirmController.h in Headers */,
+				B0D317042611F29100610EDF /* OKActionSheetController.h in Headers */,
 				BA578E2C25ACA43D00EFE0AA /* OneKey-Prefix.pch in Headers */,
 				881425B125B5BD2C00961668 /* OKHWCompleteCopyViewController.h in Headers */,
 				8814254A25B18EAA00961668 /* OKWordCheckViewController.h in Headers */,
@@ -3080,6 +3098,7 @@
 				BACB6BC5260DF2C8009B689A /* python in Resources */,
 				8814253425B18EAA00961668 /* OKShareView.xib in Resources */,
 				888C9D3B260A431800EB4978 /* OKDAppMenuSheetCollectionCell.xib in Resources */,
+				B0D317002611F24200610EDF /* Common.storyboard in Resources */,
 				881BA90525FE621500721FCE /* OKModalNavView.xib in Resources */,
 				88B8A53A26067B2000F38ADA /* NetworkErrorView.xib in Resources */,
 				8864AEAE25E6081100459C4E /* SelectAssetType.storyboard in Resources */,
@@ -3370,6 +3389,7 @@
 				881424EE25B18EAA00961668 /* OKEditWalletNameViewController.m in Sources */,
 				881424C325B18EAA00961668 /* OKNetTableViewCellModel.m in Sources */,
 				8814252F25B18EAA00961668 /* OKPyCommandsManager.m in Sources */,
+				B0D317052611F29100610EDF /* OKActionSheetController.m in Sources */,
 				8814246B25B18EAA00961668 /* OKVerifySignatureViewController.m in Sources */,
 				AB3F4EEE868AEEB2FD3E7365 /* UIImage+OneKey.m in Sources */,
 				8814259925B18EAA00961668 /* OKButton.m in Sources */,
