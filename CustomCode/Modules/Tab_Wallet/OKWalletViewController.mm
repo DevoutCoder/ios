@@ -136,12 +136,12 @@
     }
     OKWeakSelf(self)
     [MBProgressHUD showHUDAddedTo:weakself.view animated:YES];
-    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         id result = [kPyCommandsManager callInterface:kInterface_switch_wallet parameter:@{@"name":kWalletManager.currentWalletInfo.name}];
         if (result != nil) {
             [self updateDataList:result isPush:NO];
         }else{
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:weakself.view animated:YES];
             });
         }
