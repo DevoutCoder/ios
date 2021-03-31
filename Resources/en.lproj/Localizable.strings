@@ -354,10 +354,10 @@
 "Gas Price maximum limit %@ gwei" = "Gas Price maximum limit %@ gwei";
 "The minimum gas limit %@" = "The minimum gas limit %@";
 "The maximum gas limit %@" = "The maximum gas limit %@";
-"Too little Gas Limit will cause the transaction to fail. Do you want to continue?" = "Too little Gas Limit will cause the transaction to fail. Do you want to continue?";
-"Gas Limit is too much, do you want to continue?" = "Gas Limit is too much, do you want to continue?";
-"Too little Gas Price will cause the transaction to fail. Do you want to continue?" = "Too little Gas Price will cause the transaction to fail. Do you want to continue?";
-"Gas Price is too much, do you want to continue?" = "Gas Price is too much, do you want to continue?";
+"Too little Gas Limit will cause the transaction to fail. Do you want to continue?" = "If the Gas Limit is too low, it may slow down the transaction on the chain. Do you continue?";
+"Gas Limit is too much, do you want to continue?" = "If Gas Limit is too high, it may cause waste of miner fees. Do you want to continue?";
+"Too little Gas Price will cause the transaction to fail. Do you want to continue?" = "If the Gas Price is too low, it may cause slow transaction on the chain. Do you want to continue?";
+"Gas Price is too much, do you want to continue?" = "If the Gas Price is too high, it may cause waste of miners' fees. Do you want to continue?";
 "Continue" = "Continue";
 "Incorrect link format" = "Incorrect link format";
 "Confirm delete" = "Confirm delete";

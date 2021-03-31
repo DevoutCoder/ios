@@ -602,10 +602,10 @@
 "Gas Price maximum limit %@ gwei" = "Gas Price 的最大限额 %@ gwei";
 "The minimum gas limit %@" = "Gas Limit 的最小限额 %@";
 "The maximum gas limit %@" = "Gas Limit 的最大限额 %@";
-"Too little Gas Limit will cause the transaction to fail. Do you want to continue?" = "Gas Limit 太少将会导致交易失败，是否继续？";
-"Gas Limit is too much, do you want to continue?" = "Gas Limit 太多，是否继续？";
-"Too little Gas Price will cause the transaction to fail. Do you want to continue?" = "Gas Price 太少将会导致交易失败，是否继续？";
-"Gas Price is too much, do you want to continue?" = "Gas Price 太多，是否继续？";
+"Too little Gas Limit will cause the transaction to fail. Do you want to continue?" = "Gas Limit 过低，可能会会导致交易上链缓慢，是否继续？";
+"Gas Limit is too much, do you want to continue?" = "Gas Limit 过高，可能会造成矿工费浪费，是否继续？";
+"Too little Gas Price will cause the transaction to fail. Do you want to continue?" = "Gas Price 过低，可能会会导致交易上链缓慢，是否继续？";
+"Gas Price is too much, do you want to continue?" = "Gas Price 过高，可能会造成矿工费浪费，是否继续？";
 "Continue" = "继续";
 "Incorrect link format" = "链接格式有误";
 "Confirm delete" = "确定删除";
