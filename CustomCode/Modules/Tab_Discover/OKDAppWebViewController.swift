@@ -162,6 +162,7 @@ final class OKDAppWebViewController: ViewController {
     @IBAction func selectAccount(_ sender: Any) {
         let page = OKChangeWalletController.withStoryboard()
         page.chianType = DAppWebManage.transformChainType(dappModel.chain)
+        page.ignoreObserveWallet = true
         page.walletChangedCallback = { [weak self] value in
             guard let self = self else { return }
             if value.addr != self.address {

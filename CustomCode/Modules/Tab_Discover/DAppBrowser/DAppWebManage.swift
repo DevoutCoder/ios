@@ -172,7 +172,7 @@ class DAppWebManage {
 
         let url = model.url.addPreHttps
         guard !url.isEmpty else { return }
-        let dappChainType = model.chain.uppercased()
+        var dappChainType = model.chain.uppercased()
         var dappName = model.name
         if dappName.isEmpty {
             dappName = model.url
@@ -187,9 +187,19 @@ class DAppWebManage {
             callBackClick()
         }
 
+        guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else {
+            goDAppBroswer()
+            return
+        }
+
+        if dappChainType.isEmpty {
+            dappChainType = wallet.coinType.uppercased()
+        }
+
         func changeWallet() {
             let page = OKChangeWalletController.withStoryboard()
             page.chianType = [DAppWebManage.transformChainType(dappChainType)]
+            page.ignoreObserveWallet = true
             page.walletChangedCallback = { _ in
                 self.handleOpenDApp(model: model, callBackClick: callBackClick)
             }
@@ -197,38 +207,38 @@ class DAppWebManage {
             OKTools.ok_TopViewController().present(page, animated: false, completion: nil)
         }
 
-        guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else {
-            goDAppBroswer()
-            return
-        }
-
-        if  dappChainType.isNotEmpty, !DAppWebManage.supportDAppCoinTypes().contains(dappChainType) {
+        if wallet.walletType == .observe {
             PanBottomAlertViewController.show(
                 icon: nil,
-                title: "Temporary does not support".localized + " " + dappChainType,
-                content: "Stay tuned".localized,
+                title: String(format: "Switch to %@ account?".localized, dappChainType),
+                content: String(format: "The current DApp only supports %@ non-observation accounts".localized, dappChainType),
                 leftAction: .init(normalTitle: "cancel".localized, onTap: nil),
                 rightAction: .init(highlightTitle: "determine".localized, onTap: {
-
+                    changeWallet()
                 })
             )
             return
         }
 
-        if dappChainType.isNotEmpty, wallet.coinType.uppercased() != dappChainType || wallet.walletType == .observe {
+        if !DAppWebManage.supportDAppCoinTypes().contains(dappChainType) {
+            PanBottomAlertViewController.show(
+                icon: nil,
+                title: "Temporary does not support".localized + " " + dappChainType,
+                content: "Stay tuned".localized,
+                leftAction: .init(normalTitle: "determine".localized, onTap: nil),
+                rightAction: nil
+            )
+            return
+        }
+
+        if wallet.coinType.uppercased() != dappChainType {
             PanBottomAlertViewController.show(
                 icon: nil,
                 title: String(format: "Switch to %@ account?".localized, dappChainType),
                 content: String(format: "Current DApp only supports %@ account".localized, dappChainType),
                 leftAction: .init(normalTitle: "cancel".localized, onTap: nil),
                 rightAction: .init(highlightTitle: "determine".localized, onTap: {
-                    let page = OKChangeWalletController.withStoryboard()
-                    page.chianType = [DAppWebManage.transformChainType(dappChainType)]
-                    page.walletChangedCallback = { _ in
-                        self.handleOpenDApp(model: model, callBackClick: callBackClick)
-                    }
-                    page.modalPresentationStyle = .overFullScreen
-                    OKTools.ok_TopViewController().present(page, animated: false, completion: nil)
+                    changeWallet()
                 })
             )
             return

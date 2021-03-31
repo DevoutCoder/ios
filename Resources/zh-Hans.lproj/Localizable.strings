@@ -611,6 +611,7 @@
 "Confirm delete" = "确定删除";
 "My Favorites" = "我的收藏";
 "No content" = "暂无任何内容";
+"The current DApp only supports %@ non-observation accounts" = "当前 DApp 只支持 %@ 非观察账户";
 // Discover Associated - end
 "No account with transaction history was found. You can choose to create a new account" = "没有找到有交易记录的账户，您可以选择创建新账户";
 "In the connection..." = "连接中...";

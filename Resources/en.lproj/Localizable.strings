@@ -363,4 +363,5 @@
 "Confirm delete" = "Confirm delete";
 "My Favorites" = "Confirm delete";
 "No content" = "No content";
+"The current DApp only supports %@ non-observation accounts" = "The current DApp only supports %@ non-observation accounts";
 // Discover Associated - end

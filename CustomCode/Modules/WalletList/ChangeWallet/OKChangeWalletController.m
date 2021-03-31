@@ -90,11 +90,11 @@ static const CGFloat MASK_ALPHA = 0.4;
         _walletsList = [[NSMutableArray alloc] init];
         NSArray<OKWalletInfoModel *> *listWallets = [kWalletManager listWallets];
         OKChangeWalletChainType type = self.chianType;
-
+        BOOL flag = self.ignoreObserveWallet;
         #define WALLET_ADD_TYPE(ARG_ChainType, ARG_WalletCoinType) \
         if (type & (ARG_ChainType)) {\
             NSArray *wallets = [listWallets ok_filter:^BOOL(id obj) {\
-                return ((OKWalletInfoModel *)obj).walletCoinType == (ARG_WalletCoinType);\
+                return ((OKWalletInfoModel *)obj).walletCoinType == (ARG_WalletCoinType) && (flag ? ((OKWalletInfoModel *)obj).walletType != OKWalletTypeObserve : true);\
             }];\
             [_walletsList addObject:wallets];\
             [self.walletCoinTypes addObject:@(ARG_WalletCoinType)];\
