@@ -74,7 +74,7 @@ class DAppWebManage {
             let wallet = OKWalletManager.sharedInstance().currentWalletInfo
             address = wallet?.addr ?? ""
         }
-//        let config: DappRPCConfig = .BSCTestnet
+//        let config: DappRPCConfig = .BSCMain
 //        return WKUserScriptConfig(
 //            address: address,
 //            chainId: config.rpcUrlInfo.1,
@@ -343,10 +343,8 @@ class DAppWebManage {
             completion(.failure(.missingParams))
             return
         }
-        guard let value = object["value"]  as? String, !value.isEmpty else {
-            completion(.failure(.missingParams))
-            return
-        }
+
+        let value = object["value"]  as? String ?? "0"
 
 //        var gas: String? = object["gas"] as? String
 //        let gasPrice: String? = object["gasPrice"] as? String
