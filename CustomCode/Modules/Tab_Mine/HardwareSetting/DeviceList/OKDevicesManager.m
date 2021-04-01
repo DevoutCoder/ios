@@ -51,7 +51,9 @@
         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
 
         OKDeviceModel *deviceModel = [[OKDeviceModel alloc] initWithJson:json];
-        [self.devices setObject:deviceModel forKey:deviceModel.deviceInfo.device_id];
+        if (deviceModel.deviceInfo.serial_num.length) {
+            [self.devices setObject:deviceModel forKey:deviceModel.deviceInfo.device_id];
+        }
     }
 }
 

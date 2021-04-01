@@ -155,4 +155,13 @@ dispatch_async(queue, ^{block});\
 #define asyncGroupLeave     dispatch_group_leave(group);
 #define asyncAwaitAll(task)  dispatch_group_notify(group, dispatch_get_main_queue(), ^{task});
 
+// 代码块运行耗时计算
+#ifndef ok_benckmark
+#define ok_benckmark(name__,code__) \
+{CFAbsoluteTime start__ = CFAbsoluteTimeGetCurrent();\
+code__ \
+CFAbsoluteTime end__ = CFAbsoluteTimeGetCurrent();\
+NSLog(@"ok_benchmark: %@: %f ms",(name__) , ((end__ - start__)*1000));}
+#endif
+
 #endif /* OKComMarco_h */
