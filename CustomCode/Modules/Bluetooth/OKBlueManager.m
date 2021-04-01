@@ -8,6 +8,7 @@
 
 #import "OKBlueManager.h"
 #import "OKDeviceModel.h"
+#import <sys/utsname.h>
 
 #define kLENGTH_FILED_START_OFFSET  10
 #define kLENGTH_FILED_END_OFFSET    18
@@ -205,7 +206,7 @@ static dispatch_once_t once;
     // 设置读取Descriptor的委托
     OKWeakSelf(self)
     [self.babyBluetooth setBlockOnReadValueForDescriptors:^(CBPeripheral *peripheral, CBDescriptor *descriptor, NSError *error) {
-        if ([descriptor.value boolValue]) {
+        if ([descriptor.value boolValue]&&[descriptor.characteristic.UUID.UUIDString isEqualToString:kREAD_CHARACTERISTIC]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 // 从block中取到值，再回到主线程
                 if ([weakSelf respondsToSelector:@selector(subscribeToComplete:)]) {
@@ -405,10 +406,7 @@ static dispatch_once_t once;
          }
     });
 }
-- (void)skipToSafari
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kBleUpdatedURL]];
-}
+
 ///获取设备的服务跟特征值[当已连接成功时]
 - (void)searchServerAndCharacteristicUUID {
     self.babyBluetooth.having(self.currentPeripheral).and.
@@ -492,10 +490,76 @@ static dispatch_once_t once;
             NSLog(@"OKBlueManager: characteristicWrite Empty data");
             return;
         }
-        [self.currentPeripheral writeValue:data forCharacteristic:self.writeCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self.currentPeripheral writeValue:data forCharacteristic:self.writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
     }
 }
 
+- (CGFloat)getBleTransmissionInterval
+{
+    struct utsname systemInfo;
+
+    uname(&systemInfo);
+
+    NSString*platform = [NSString stringWithCString: systemInfo.machine encoding:NSASCIIStringEncoding];
+
+    if ([platform hasPrefix:@"iPad"]) {
+        return 0.025;
+    }
+    
+    if([platform isEqualToString:@"iPhone1,1"])  return 0.05; //@"iPhone 2G";
+
+    if([platform isEqualToString:@"iPhone1,2"])  return 0.05; //@"iPhone 3G";
+
+    if([platform isEqualToString:@"iPhone2,1"])  return 0.05; //@"iPhone 3GS";
+
+    if([platform isEqualToString:@"iPhone3,1"])  return 0.05; //@"iPhone 4";
+
+    if([platform isEqualToString:@"iPhone3,2"])  return 0.05; //@"iPhone 4";
+
+    if([platform isEqualToString:@"iPhone3,3"])  return 0.05; //@"iPhone 4";
+
+    if([platform isEqualToString:@"iPhone4,1"])  return 0.05; //@"iPhone 4S";
+
+    if([platform isEqualToString:@"iPhone5,1"])  return 0.05; //@"iPhone 5";
+
+    if([platform isEqualToString:@"iPhone5,2"])  return 0.05; //@"iPhone 5";
+
+    if([platform isEqualToString:@"iPhone5,3"])  return 0.05; //@"iPhone 5c";
+
+    if([platform isEqualToString:@"iPhone5,4"])  return 0.05; //@"iPhone 5c";
+
+    if([platform isEqualToString:@"iPhone6,1"])  return 0.05; //@"iPhone 5s";
+
+    if([platform isEqualToString:@"iPhone6,2"])  return 0.05; //@"iPhone 5s";
+
+    if([platform isEqualToString:@"iPhone7,1"])  return 0.05; //@"iPhone 6 Plus";
+
+    if([platform isEqualToString:@"iPhone7,2"])  return 0.05; //@"iPhone 6";
+
+    if([platform isEqualToString:@"iPhone8,1"])  return 0.05; //@"iPhone 6s";
+
+    if([platform isEqualToString:@"iPhone8,2"])  return 0.05; //@"iPhone 6s Plus";
+
+    if([platform isEqualToString:@"iPhone8,4"])  return 0.05; //@"iPhone SE";
+
+    if([platform isEqualToString:@"iPhone9,1"])  return 0.025; //return@"iPhone 7";
+
+    if([platform isEqualToString:@"iPhone9,2"])  return 0.025; //@"iPhone 7 Plus";
+
+    if([platform isEqualToString:@"iPhone10,1"]) return 0.025; //@"iPhone 8";
+
+    if([platform isEqualToString:@"iPhone10,4"]) return 0.025; //@"iPhone 8";
+
+    if([platform isEqualToString:@"iPhone10,2"]) return 0.025; //@"iPhone 8 Plus";
+
+    if([platform isEqualToString:@"iPhone10,5"]) return 0.025; //@"iPhone 8 Plus";
+
+    if([platform isEqualToString:@"iPhone10,3"]) return 0.007; //@"iPhone X";
+
+    if([platform isEqualToString:@"iPhone10,6"]) return 0.007; //@"iPhone X";
+    
+    return 0.007; //@"iPhone X以上";
+}
 - (NSString *)characteristicRead
 {
     NSLog(@"self.currentReadDataStr == %@",self.currentReadDataStr);

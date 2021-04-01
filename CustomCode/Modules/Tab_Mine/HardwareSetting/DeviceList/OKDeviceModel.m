@@ -33,7 +33,7 @@
 
 - (BOOL)updateWithDict:(NSDictionary *)newDict {
     BOOL changed = NO;
-    for (NSString *key in newDict) {
+    for (NSString *key in [newDict copy]) {
         id newValue = newDict[key];
         id oldValue = [_deviceInfo valueForKey:key];
 
