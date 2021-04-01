@@ -152,7 +152,7 @@
 {
     OKWeakSelf(self)
     weakself.isRefreshing = YES;
-    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_HIGH), ^{
         NSDictionary* result = [kPyCommandsManager callInterface:kInterface_get_wallet_balance parameter:@{}];
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakself.refreshControl endRefreshing];

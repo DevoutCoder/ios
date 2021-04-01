@@ -155,7 +155,7 @@ typedef enum {
         NSDictionary *create =  [kPyCommandsManager callInterface:kInterfaceCreate_hd_wallet parameter:@{@"password":pwd,@"seed":seed}];
         OKCreateResultModel *createResultModel = [OKCreateResultModel mj_objectWithKeyValues:create];
         if (createResultModel != nil) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 if (createResultModel.derived_info.count == 0) {
                     NSMutableArray *arrayM = [NSMutableArray array];
                     for (OKCreateResultWalletInfoModel *model in createResultModel.wallet_info) {

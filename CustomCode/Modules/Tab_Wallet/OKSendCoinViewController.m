@@ -621,7 +621,7 @@
             }];
         }
     } cancle:^{
-        [kPyCommandsManager callInterface:kInterface_set_user_cancel parameter:@{}];
+        [kPyCommandsManager callInterface:kInterface_set_cancel_flag parameter:@{}];
         weakself.sendTxPreInfoVc = nil;
     }];
 }

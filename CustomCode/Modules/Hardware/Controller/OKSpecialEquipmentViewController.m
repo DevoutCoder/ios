@@ -110,7 +110,7 @@
         NSDictionary *create =  [kPyCommandsManager callInterface:kInterfaceCreate_hd_wallet parameter:@{@"password":pwd,@"seed":seed}];
         OKCreateResultModel *createResultModel = [OKCreateResultModel mj_objectWithKeyValues:create];
         if (createResultModel != nil) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (createResultModel.derived_info.count == 0) {
                 OKCreateResultWalletInfoModel *model = [createResultModel.wallet_info firstObject];
                 [kPyCommandsManager callInterface:kInterfacerecovery_confirmed parameter:@{@"name_list":@[model.name]}];

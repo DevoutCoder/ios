@@ -7,6 +7,7 @@
 //
 
 #import "OKPyCommandsManager.h"
+#import "OKDeviceIdInconsistentViewController.h"
 
 #define OKPY_METHOD_CASE(methodName)\
     else if([method isEqualToString:methodName])
@@ -669,9 +670,19 @@ static dispatch_once_t once;
             // 释放GIL ！！！！！
             PyGILState_Release(state);
             if (![self.noTipsInterface containsObject:method]) {
-                [kTools tipMessage:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
+                NSString *msgStr = [NSString stringWithCString:msg encoding:NSUTF8StringEncoding];
+                if ([msgStr isEqualToString:@"Can't Pair With Your Device"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        OKWeakSelf(self)
+                        OKDeviceIdInconsistentViewController *deviceIdVc = [OKDeviceIdInconsistentViewController deviceIdInconsistentViewController:kOKBlueManager.currentPeripheral.name];
+                        deviceIdVc.modalPresentationStyle = UIModalPresentationOverFullScreen;
+                        [weakself.OK_TopViewController presentViewController:deviceIdVc animated:NO completion:nil];
+                    });
+                }else{
+                    [kTools tipMessage:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
+                }
             } else {
-                [kTools debugTipMessage:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
+                    [kTools debugTipMessage:[NSString stringWithCString:msg encoding:NSUTF8StringEncoding]];
             }
             return nil;
         }
