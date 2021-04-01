@@ -11,8 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OKBasicTableViewCellModel : NSObject
+@property (nonatomic, assign) BOOL check;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy, nullable) NSString *iconUrlStr;
++ (instancetype)modelWith:(NSString *)text;
 @end
 
 @interface OKBasicTableViewCell : UITableViewCell

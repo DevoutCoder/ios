@@ -15,10 +15,9 @@
 #import "OKMnemonicImportViewController.h"
 #import "OKKeystoreImportViewController.h"
 #import "OKObserveImportViewController.h"
+#import "OKImportMnemonicController.h"
 
 @interface OKSelectImportTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
-
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -35,8 +34,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = MyLocalizedString(@"Import a single currency wallet", nil);
+    self.tableView.mj_insetT = 8;
+    self.title = @"Select import method".localized;
     self.tableView.tableFooterView = [UIView new];
+}
+
+- (UIColor *)navBarTintColor {
+    return UIColor.BG_W02;
+}
+
+- (UIScrollView *)scrollViewForNavbar {
+    return self.tableView;
 }
 
 #pragma mark - UITableViewDelegate | UITableViewDataSource
@@ -46,7 +54,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 74;
+    return 56;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -73,6 +81,7 @@
             break;
         case 1:
         {
+//            OKImportMnemonicController *mnemonicImportVc = [OKImportMnemonicController controllerWithStoryboard];
             OKMnemonicImportViewController *mnemonicImportVc = [OKMnemonicImportViewController mnemonicImportViewController];
             mnemonicImportVc.importType = OKAddTypeImportSeed;
             mnemonicImportVc.coinType = self.coinType;

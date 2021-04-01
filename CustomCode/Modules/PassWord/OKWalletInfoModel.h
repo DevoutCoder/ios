@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)walletTypeDesc;
 + (OKWalletType)walletTypeWithStr:(NSString *)type;
++ (OKWalletCoinType)walletCoinTypeWithStr:(NSString *)coinName;
 @end
 
 NS_ASSUME_NONNULL_END

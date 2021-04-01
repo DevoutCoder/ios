@@ -11,19 +11,25 @@ static const CGFloat cellHeightDefault = 56;
 static const NSInteger cancelIndex = -1;
 
 @implementation OKBasicTableViewCellModel
++ (instancetype)modelWith:(NSString *)text {
+    OKBasicTableViewCellModel *model = [[OKBasicTableViewCellModel alloc] init];
+    model.text = text;
+    return model;
+}
 @end
 
 @interface OKBasicTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *textLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelLeft;
+@property (weak, nonatomic) IBOutlet UIImageView *checkmark;
 @end
 
 @implementation OKBasicTableViewCell
 - (void)setModel:(OKBasicTableViewCellModel *)model {
     _model = model;
     self.textLbl.text = model.text;
-    
+    self.checkmark.hidden = !model.check;
     if (model.iconUrlStr.length) {
         self.icon.hidden = NO;
         [self.icon sd_setImageWithURL:model.iconUrlStr.toURL placeholderImage:[UIImage imageNamed:@"icon_ph"]];

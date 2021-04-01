@@ -45,11 +45,12 @@
 "Import a single currency wallet" = "导入单币种账户";
 "Select the currency" = "选择币种";
 "Private key import (direct input or scan)" = "私钥导入（直接输入或扫码）";
-"Mnemonic import" = "助记词导入";
+"import mnemonic" = "助记词导入";
+"Account name" = "账户名称";
 "Keystore import" = "Keystore 导入";
 "Observe the purse" = "观察钱包";
 "The private key import" = "私钥导入";
-"Mnemonic import" = "助记词导入";
+"Select import method" = "选择导入方式";
 "Keystore import" = "Keystore 导入";
 "Observe the purse import" = "观察钱包";
 "Once imported, the private key is encrypted and stored on your local device for safekeeping. OneKey does not store any private data, nor can it retrieve it for you" = "私钥一旦导入，就会经过加密存储在您的本地设备中并妥当保管。OneKey 不存储任何私密数据，也无法帮您找回。";
@@ -197,6 +198,7 @@
 "The private key cannot be empty" = "私钥不能为空";
 "Please enter the name of the wallet" = "请输入账户名称";
 "Mnemonic import successful" = "导入助记词成功";
+"Mnemonic import" = "导入助记词";
 "The new password cannot be the same as the old one" = "新密码不能与旧密码相同";
 "Password changed successfully" = "密码修改成功";
 "The password cannot be empty" = "密码不能为空";
@@ -457,7 +459,7 @@
 "hardwareWallet.xpub.xpub" = "扩展公钥";
 "hardwareWallet.xpub.title" = "多重签名扩展公钥";
 "hardwareWallet.xpub.copy" = "已复制到剪贴板";
-"hardwareWallet.xpub.tip" = "「扩展公钥」，也被称为XPUB。是比特币标准(BIP32)的一部分，不包含任何私钥。 \n您在创建或加入共管（多重签名）钱包时，会用到下方显示的扩展公钥。";
+"hardwareWallet.xpub.tip" = "「扩展公钥」，也被称为XPUB。是比特币标准(BIP32)的一部分，不包含任何私钥。\n您在创建或加入共管（多重签名）钱包时，会用到下方显示的扩展公钥。";
 
 "hardwareWallet.delete" = "删除设备";
 "hardwareWallet.delete.tip" = "这个硬件设备会在您的设备列表消失。您用这个硬件设备创建的账户依然可以正常显示，下次您使用的时候会重新配对并恢复。";
@@ -513,11 +515,12 @@
 "Save Failed" = "保存失败";
 "Share QRCode" = "分享 %@ 收款码";
 
+"wallet.AddrType" = "地址类型";
 "wallet.btc.selectAddrType" = "选择 BTC 地址类型";
 "wallet.btc.selectAddrTypeTip" = "地址类型选择后无法更改，推荐使用兼容隔离见证 SegWit。";
-"wallet.btc.segwit" = "兼容隔离见证 SegWit";
+"wallet.btc.segwit" = "隔离见证（兼容）SegWit";
 "wallet.btc.segwitDesc" = "以 3 开头，广泛普及，转账手续费较低";
-"wallet.btc.nativeSegwit" = "原生隔离见证 Native SegWit";
+"wallet.btc.nativeSegwit" = "隔离见证（原生） Native SegWit";
 "wallet.btc.nativeSegwitDesc" = "以 bc1 开头，正在普及，转账手续费最低";
 "wallet.btc.normalAddr" = "普通地址 Legacy";
 "wallet.btc.normalAddrDesc" = "以 1 开头，全面普及，转账手续费中等";
@@ -618,3 +621,13 @@
 "It is possible that the" = "可能是";
 "has been reset and changed the mnemonic. Import the original mnemonic into this hardware wallet and try again." = "曾进行过重置并更换了助记词。请将原助记词导入此硬件钱包，然后再试一次。";
 "The operation failure" = "操作失败";
+
+"import" = "导入";
+"import.mnemonic.warring" = "请勿导入 OneKey 硬件钱包的助记词。这样做存在安全隐患。";
+"import.mnemonic.tip" = "导入的私密数据将加密存储在本地设备中，永不触网。OneKey 服务器不会存储你的任何私密数据。";
+"import.mnemonic.tip2" = "输入 12/18/24 位助记词，并用空格分隔";
+"import.path.tip" = "同一套助记词设置不同路径可生成不同的账户地址。请务必记住自定义路径，输入错误的路径将无法找到地址。";
+"import.advance" = "高级设置";
+"import.path" = "路径";
+"import.btc.addresstype" = "账户地址类型选择后无法更改，推荐选择隔离见证（兼容） SegWit。
+隔离见证（兼容） SegWit，生成的地址以 3 开头，已广泛普及，转账手续费较低。隔离见证（原生）Native SegWit 以 bc1 开头，目前正在普及，手续费最低。普通地址 Legacy 以 1开头，手续费略高。";

@@ -15,8 +15,6 @@
 
 @interface OKSelectCoinTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,strong)NSArray *coinTypeListArray;
@@ -38,13 +36,23 @@
 
 - (void)stupUI
 {
-    self.titleLabel.text = MyLocalizedString(@"Select the currency", nil);
+    self.tableView.mj_insetT = 8;
+    self.title = MyLocalizedString(@"Select the currency", nil);
     if (_addType == OKAddTypeCreateHDDerived) {
         self.title = MyLocalizedString(@"Create a wallet", nil);
     }else if (_addType == OKAddTypeImport){
         self.title = MyLocalizedString(@"Import a single currency wallet", nil);
     }
 }
+
+- (UIColor *)navBarTintColor {
+    return UIColor.BG_W02;
+}
+
+- (UIScrollView *)scrollViewForNavbar {
+    return self.tableView;
+}
+
 #pragma mark - UITableViewDelegate | UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -52,7 +60,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 74;
+    return 56;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

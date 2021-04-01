@@ -52,19 +52,25 @@
     }
 }
 
-- (OKWalletCoinType)walletCoinType {
-    NSString *coinType = self.type.lowercaseString;
+
++ (OKWalletCoinType)walletCoinTypeWithStr:(NSString *)coinName {
+    coinName = coinName.lowercaseString;
+
     OKWalletCoinType type = OKWalletCoinTypeUnknown;
-    if ([coinType hasPrefix:@"btc"]) {
+    #define OK_WALLET_COIN_TYPE_CASE(coinName__,coinType__) \
+        else if([coinName hasPrefix:(coinName__)]) {type = (coinType__);}
+    if ([coinName hasPrefix:@"btc"]) {
         type = OKWalletCoinTypeBTC;
-    } else if ([coinType hasPrefix:@"eth"]) {
-        type = OKWalletCoinTypeETH;
-    } else if ([coinType hasPrefix:@"bsc"]) {
-        type = OKWalletCoinTypeBSC;
-    } else if ([coinType hasPrefix:@"heco"]) {
-        type = OKWalletCoinTypeHECO;
     }
+    OK_WALLET_COIN_TYPE_CASE(@"eth",    OKWalletCoinTypeETH)
+    OK_WALLET_COIN_TYPE_CASE(@"bsc",    OKWalletCoinTypeBSC)
+    OK_WALLET_COIN_TYPE_CASE(@"heco",   OKWalletCoinTypeHECO)
+
     return type;
+}
+
+- (OKWalletCoinType)walletCoinType {
+    return [OKWalletInfoModel walletCoinTypeWithStr: self.type];
 }
 
 @end

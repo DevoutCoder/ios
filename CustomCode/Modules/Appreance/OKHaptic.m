@@ -45,6 +45,7 @@ static dispatch_once_t once;
         }
         [(UINotificationFeedbackGenerator *)generator notificationOccurred:type];
     }
+    [self prepare];
 }
 
 - (void)impactOccurredLight {
