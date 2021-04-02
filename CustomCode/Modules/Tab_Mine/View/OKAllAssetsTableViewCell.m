@@ -35,7 +35,7 @@
         [self.iconImageView sd_setImageWithURL:token.logoURI.toURL placeholderImage:[UIImage imageNamed:@"icon_ph"]];
     } else { // native tokens
         self.balanceLabel.text = [model.balance numStrPrecition:[kWalletManager getPrecision:model.coin]];
-        NSString *iconImageName = [NSString stringWithFormat:@"token_%@", model.coin];
+        NSString *iconImageName = [NSString stringWithFormat:@"token_%@", model.coin.lowercaseString];
         self.cointypeLabel.text = model.coin.uppercaseString;
         self.iconImageView.image = [UIImage imageNamed:iconImageName];
     }

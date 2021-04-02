@@ -104,6 +104,9 @@ static dispatch_once_t once;
 }
 
 - (NSArray <OKToken *> *)tokensFilterWith:(NSString *)text {
+    if (!text.length) {
+        return @[];
+    }
     NSString *searchText = text.lowercaseString;
     NSMutableArray *mutArray = [[NSMutableArray alloc] init];
     for (OKToken *model in self.tokens) {
