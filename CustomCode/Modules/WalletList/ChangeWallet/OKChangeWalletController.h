@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OKChangeWalletController : BaseViewController
 @property (nonatomic, assign)OKChangeWalletChainType chianType;
 @property (nonatomic, assign)BOOL ignoreObserveWallet;
+@property (nonatomic, assign)BOOL callbackInvoveAfterDismissed;
 @property (nonatomic, copy) void(^walletChangedCallback)(OKWalletInfoModel *wallet);
 @property (nonatomic, copy) void(^cancelCallback)(BOOL selected);
 

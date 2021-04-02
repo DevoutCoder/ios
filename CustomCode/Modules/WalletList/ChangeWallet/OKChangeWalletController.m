@@ -27,7 +27,7 @@ static const CGFloat MASK_ALPHA = 0.4;
 @property (nonatomic, strong)NSMutableArray <NSArray <OKWalletInfoModel *>*>*walletsList;
 @property (nonatomic, strong)NSMutableArray <NSNumber *>*walletCoinTypes;
 @property (nonatomic, assign)NSUInteger currentWalletIndex;
-@property (nonatomic, assign)BOOL walletSelected;
+@property (nonatomic, strong)OKWalletInfoModel *wallet;
 
 @end
 
@@ -179,9 +179,9 @@ static const CGFloat MASK_ALPHA = 0.4;
             return;
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotiSelectWalletComplete object:nil];
-        self.walletSelected = YES;
+        self.wallet = wallet;
         self.loadingIndicator.hidden = YES;
-        if (self.walletChangedCallback) {
+        if (!self.callbackInvoveAfterDismissed && self.walletChangedCallback) {
             self.walletChangedCallback(wallet);
         }
         [self dismiss];
@@ -227,10 +227,14 @@ static const CGFloat MASK_ALPHA = 0.4;
         self.panel.centerY = self.view.height + self.panel.height * 0.5 + 20;
     } completion:^(BOOL finished) {
         self.panelBottom.constant = - self.panel.height - 30;
-        if (self.cancelCallback) {
-            self.cancelCallback(self.walletSelected);
-        }
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:NO completion:^{
+            if (self.cancelCallback) {
+                self.cancelCallback(!!self.wallet);
+            }
+            if (self.callbackInvoveAfterDismissed && self.walletChangedCallback && self.wallet) {
+                self.walletChangedCallback(self.wallet);
+            }
+        }];
     }];
 }
 @end
