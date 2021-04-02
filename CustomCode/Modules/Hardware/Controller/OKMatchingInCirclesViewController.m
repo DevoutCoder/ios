@@ -163,7 +163,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [kTools tipHwMessage:@"In the connection...".localized];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Do something...
         OKPeripheralInfo *peripheralInfo = self.dataSource[indexPath.row];
         OKWeakSelf(self)
@@ -245,13 +245,24 @@
         [weakself.dataSource removeAllObjects];
     }
     [weakself.dataSource addObjectsFromArray:peripheralInfoArr];
-    if (![weakself.dataSource containsObject:kOKBlueManager.currentPeripheral] && kOKBlueManager.currentPeripheral != nil) {
+    if (![weakself isContainsPeripheral:kOKBlueManager.currentPeripheral] && kOKBlueManager.currentPeripheral != nil) {
         OKPeripheralInfo *currentPeripheralInfo = [[OKPeripheralInfo alloc] init];
         currentPeripheralInfo.peripheral = kOKBlueManager.currentPeripheral;
         [weakself.dataSource addObject:currentPeripheralInfo];
     }
     [weakself.tableView reloadData];
 }
+- (BOOL)isContainsPeripheral:(CBPeripheral *)peripheral
+{
+    BOOL isContains = NO;
+    for (OKPeripheralInfo *info in self.dataSource) {
+        if ([info.peripheral.name isEqualToString:peripheral.name]) {
+            isContains = YES;
+        }
+    }
+    return isContains;
+}
+
 
 - (void)connectSuccess {
     NSLog(@"connectSuccess");

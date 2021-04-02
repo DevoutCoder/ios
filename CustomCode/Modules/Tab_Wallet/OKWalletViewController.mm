@@ -116,7 +116,9 @@
     [OKPyCommandsManager sharedInstance];
     [kPyCommandsManager callInterface:kInterfaceLoad_all_wallet parameter:@{}];
     [self checkWalletResetUI];
-    [kUserSettingManager setDefaultSetings];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [kUserSettingManager setDefaultSetings];
+    });
 }
 
 - (void)switchWallet
@@ -152,7 +154,7 @@
 {
     OKWeakSelf(self)
     weakself.isRefreshing = YES;
-    dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_HIGH), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSDictionary* result = [kPyCommandsManager callInterface:kInterface_get_wallet_balance parameter:@{}];
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakself.refreshControl endRefreshing];
