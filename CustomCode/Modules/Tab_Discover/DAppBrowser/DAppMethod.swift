@@ -8,4 +8,7 @@ enum DAppMethod: String, Decodable, CaseIterable {
     case signTypedMessage
     case ecRecover
     case requestAccounts
+    case watchAsset
+    case addEthereumChain
+    case oneKeySignMessageHex
 }

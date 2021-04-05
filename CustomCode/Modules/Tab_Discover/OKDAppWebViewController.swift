@@ -47,7 +47,6 @@ final class OKDAppWebViewController: ViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        webView.stopLoading()
     }
 
     override func viewDidLoad() {
@@ -70,6 +69,7 @@ final class OKDAppWebViewController: ViewController {
         for name in DAppMethod.allCases {
             controller.add(ScriptMessageProxy(delegate: self), name: name.rawValue)
         }
+//        controller.add(self, name: "_tw_")
         config.userContentController = controller
         webView = WKWebView(frame: .zero, configuration: config)
         webView.uiDelegate = self
@@ -284,36 +284,18 @@ extension OKDAppWebViewController: WKScriptMessageHandler {
             let id = json["id"] as? Int64 else {
             return
         }
-
         switch method {
         case .requestAccounts:
             requestAccountsId = id
             handleRequestAccounts()
-        case .signMessage:
-            guard let data = extractMessage(json: json) else {
-                print("data is missing")
-                return
-            }
-            handleSignMessage(id: id, data: data, personal: false)
-            break
-        case .signPersonalMessage:
-            guard let data = extractMessage(json: json) else {
-                print("data is missing")
-                return
-            }
-            handleSignMessage(id: id, data: data, personal: true)
-            break
-        case .ecRecover:
-            guard let tuple = extractSignature(json: json) else {
-                print("signature or message is missing")
-                return
-            }
-            let recovered = ecRecover(signature: tuple.signature, message: tuple.message) ?? ""
-            print(recovered)
-            DispatchQueue.main.async {
-                self.webView.sendResult(recovered, to: id)
-            }
-            break
+
+        /// ---------- Notice -----------------
+        case .signMessage: break
+        case .signPersonalMessage: break
+        case .ecRecover: break
+        case .signTypedMessage: break
+        /// implement in oneKeySignMessageHex
+
         case .signTransaction:
             DAppWebManage.dealTransaction(json: json) { [weak self] result in
                 guard let self = self else { return }
@@ -327,6 +309,17 @@ extension OKDAppWebViewController: WKScriptMessageHandler {
                     break
                 }
             }
+        case .oneKeySignMessageHex:
+            guard let params = json["object"] as? [String: Any],
+                  let message = params["data"] as? String else {
+                OKTools.sharedInstance().tipMessage("签名信息缺失")
+                return
+            }
+            var payload = params["payload"] as? String ?? ""
+            if payload.isEmpty {
+                payload = message
+            }
+            handleSignMessage(id: id, message: message, payload: payload)
             break
         default:
             break
@@ -337,12 +330,13 @@ extension OKDAppWebViewController: WKScriptMessageHandler {
         if address.isEmpty {
             selectAccount(self)
         } else {
+            webView.evaluateJavaScript("window.ethereum.setAddress(\"\(address)\");", completionHandler: nil)
             webView.sendResults([address], to: requestAccountsId)
         }
     }
 
-    private func handleSignMessage(id: Int64, data: Data, personal: Bool) {
-        DAppWebManage.dealSignMessage(data: data, personal: personal) { [weak self] result in
+    private func handleSignMessage(id: Int64, message: String, payload: String) {
+        DAppWebManage.dealSignMessage(message: message, payload: payload) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .success(let signed):
@@ -352,41 +346,6 @@ extension OKDAppWebViewController: WKScriptMessageHandler {
             self.webView.sendError(error.errorMsg, to: id)
             }
         }
-    }
-
-    private func extractMessage(json: [String: Any]) -> Data? {
-        guard let params = json["object"] as? [String: Any],
-            let string = params["data"] as? String,
-            let data = Data(hexString: string) else {
-            return nil
-        }
-        return data
-    }
-
-    private func extractSignature(json: [String: Any]) -> (signature: Data, message: Data)? {
-        guard let params = json["object"] as? [String: Any],
-            let signature = params["signature"] as? String,
-            let message = params["message"] as? String else {
-            return nil
-        }
-        return (Data(hexString: signature)!, Data(hexString: message)!)
-    }
-
-    // TODO ecRecover
-    private func ecRecover(signature: Data, message: Data) -> String? {
-//        let data = ethereumMessage(for: message)
-//        let hash = Hash.keccak256(data: data)
-//        guard let publicKey = PublicKey.recover(signature: signature, message: hash),
-//            PublicKey.isValid(data: publicKey.data, type: publicKey.keyType) else {
-//            return nil
-//        }
-//        return CoinType.ethereum.deriveAddressFromPublicKey(publicKey: publicKey).lowercased()
-        return nil
-    }
-
-    private func ethereumMessage(for data: Data) -> Data {
-        let prefix = "\u{19}Ethereum Signed Message:\n\(data.count)".data(using: .utf8)!
-        return prefix + data
     }
 
     private func hideErrorView() {
@@ -449,23 +408,23 @@ extension OKDAppWebViewController: WKUIDelegate {
 
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         debugPrint("runJavaScriptAlertPanelWithMessage: " + message)
-//        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-//        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
-//            completionHandler()
-//        }))
-//        present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
+            completionHandler()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         debugPrint("runJavaScriptConfirmPanelWithMessage: " + message)
-//        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-//        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
-//            completionHandler(true)
-//        }))
-//        alert.addAction(.init(title: "Cancel", style: .cancel, handler: { _ in
-//            completionHandler(false)
-//        }))
-//        present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: "OK", style: .default, handler: { _ in
+            completionHandler(true)
+        }))
+        alert.addAction(.init(title: "Cancel", style: .cancel, handler: { _ in
+            completionHandler(false)
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 

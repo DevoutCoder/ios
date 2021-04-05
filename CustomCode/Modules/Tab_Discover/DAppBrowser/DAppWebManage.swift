@@ -74,20 +74,24 @@ class DAppWebManage {
             let wallet = OKWalletManager.sharedInstance().currentWalletInfo
             address = wallet?.addr ?? ""
         }
-//        let config: DappRPCConfig = .BSCMain
+//        let config: DappRPCConfig = .EthereumMainNetwork
 //        return WKUserScriptConfig(
 //            address: address,
 //            chainId: config.rpcUrlInfo.1,
-//            rpcUrl: config.rpcUrlInfo.0,
-//            privacyMode: false
+//            rpcUrl: config.rpcUrlInfo.0
 //        )
         let result = OKPyCommandsManager.sharedInstance().callInterface(OKSwiftHelper.dapp_eth_rpc_info(), parameter: nil) as? [String : Any]
         guard let map = result,
               let rpcUrl = map["rpc"] as? String,
               let chainId = map["chain_id"] as? Int else {
-            return nil
+            let config: DappRPCConfig = .EthereumMainNetwork
+            return WKUserScriptConfig(
+                address: address,
+                chainId: config.rpcUrlInfo.1,
+                rpcUrl: config.rpcUrlInfo.0
+            )
         }
-        return WKUserScriptConfig(address: address, chainId: chainId, rpcUrl: rpcUrl, privacyMode: false)
+        return WKUserScriptConfig(address: address, chainId: chainId, rpcUrl: rpcUrl)
     }
 
     static func ethSignAndSendTx(transaction: DAppTransaction,
@@ -125,13 +129,10 @@ class DAppWebManage {
 
     static func signMessage(
         wallet: OKWalletInfoModel,
-        data: Data,
+        message: String,
         password: String,
-        personal: Bool,
         completion: @escaping (String) -> Void)
     {
-        let newData = personal ? ethereumMessage(for: data).keccak256.data(using: .utf8)! : data
-        let message = newData.string(encoding: .utf8)!
         let parameter = [
             "address" : wallet.addr,
             "message" : message,
@@ -142,11 +143,6 @@ class DAppWebManage {
             let signed = (result as? NSMutableString ?? "") as String
             completion(signed)
         }
-    }
-
-    static func ethereumMessage(for data: Data) -> Data {
-        let prefix = "\u{19}Ethereum Signed Message:\n\(data.count)".data(using: .utf8)!
-        return prefix + data
     }
 
     static func supportDAppCoinTypes() -> [String] {
@@ -266,8 +262,8 @@ class DAppWebManage {
     }
 
     static func dealSignMessage(
-        data: Data,
-        personal: Bool,
+        message: String,
+        payload: String,
         completion: @escaping (Result<String, EthSignAndSendTxError>) -> Void) {
 
         guard let wallet = OKWalletManager.sharedInstance().currentWalletInfo else {
@@ -278,8 +274,7 @@ class DAppWebManage {
             completion(.failure(.missingParams))
             return
         }
-        let message = personal ? String(data: data, encoding: .utf8) ?? "" : data.hexString
-        let page = OKSignMessageViewController.instance(address: wallet.addr, message: message)
+        let page = OKSignMessageViewController.instance(address: wallet.addr, message: payload)
 
         page.cancelAction = { [weak page] in
             page?.dismiss(animated: true, completion: nil)
@@ -295,9 +290,8 @@ class DAppWebManage {
                 OKTools.sharedInstance().showIndicatorView()
                 DAppWebManage.signMessage(
                     wallet: wallet,
-                    data: data,
-                    password: password,
-                    personal: personal
+                    message: message,
+                    password: password
                 ) { [weak hardwareAlert] signed in
                     OKTools.sharedInstance().hideIndicatorView()
                     if (isHardwareWallet) {

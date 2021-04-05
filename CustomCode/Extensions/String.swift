@@ -153,6 +153,10 @@ extension String {
         return  self == "NaN"
     }
 
+    var hexStringToString: String? {
+        return Data(hexString: self)?.string(encoding: .utf8)
+    }
+
 }
 
 extension String {
