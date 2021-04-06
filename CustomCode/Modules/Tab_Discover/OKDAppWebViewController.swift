@@ -31,6 +31,8 @@ final class OKDAppWebViewController: ViewController {
 
     private var address: String = ""
 
+    private var coinType: String = ""
+
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
         progressView.tintColor = .tintBrand()
@@ -113,6 +115,7 @@ final class OKDAppWebViewController: ViewController {
         if let wallet = OKWalletManager.sharedInstance().currentWalletInfo {
             accountName.text = wallet.addr.addressName
             tokenImage.image = wallet.coinType.coinImage
+            coinType = wallet.coinType
             address = wallet.addr
         }
 
@@ -165,8 +168,9 @@ final class OKDAppWebViewController: ViewController {
         page.ignoreObserveWallet = true
         page.walletChangedCallback = { [weak self] value in
             guard let self = self else { return }
-            if value.addr != self.address {
+            if value.addr != self.address || value.coinType != self.coinType {
                 self.address = value.addr
+                self.coinType = value.coinType
                 self.updateAccount(wallet: value)
                 self.reloadWebView()
             }
@@ -259,6 +263,7 @@ final class OKDAppWebViewController: ViewController {
     private func updateAccount(wallet: OKWalletInfoModel) {
         accountName.text = wallet.addr.addressName
         address = wallet.addr
+        coinType = wallet.coinType
         tokenImage.image = wallet.coinType.coinImage
         updateRPCInfo(address: address)
         handleRequestAccounts()
