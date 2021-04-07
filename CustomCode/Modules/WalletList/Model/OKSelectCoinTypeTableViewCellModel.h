@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OKSelectCoinTypeTableViewCellModel : NSObject
 @property (nonatomic,copy) NSString* iconName;
 @property (nonatomic,copy) NSString* titleString;
+@property (nonatomic,assign) OKAddType addtType;
 @end
 
 NS_ASSUME_NONNULL_END

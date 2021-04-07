@@ -389,7 +389,6 @@
 		8814257F25B18EAA00961668 /* OKWalletListTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814240B25B18EAA00961668 /* OKWalletListTableViewCell.h */; };
 		8814258025B18EAA00961668 /* WalletList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8814240D25B18EAA00961668 /* WalletList.storyboard */; };
 		8814258125B18EAA00961668 /* OKSelectImportTypeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814240E25B18EAA00961668 /* OKSelectImportTypeViewController.h */; };
-		8814258225B18EAA00961668 /* OKAddBottomViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814240F25B18EAA00961668 /* OKAddBottomViewController.h */; };
 		8814258325B18EAA00961668 /* OKWalletListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8814241025B18EAA00961668 /* OKWalletListViewController.m */; };
 		8814258425B18EAA00961668 /* OKCreateSelectWalletTypeController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814241125B18EAA00961668 /* OKCreateSelectWalletTypeController.h */; };
 		8814258525B18EAA00961668 /* OKTipsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814241225B18EAA00961668 /* OKTipsViewController.h */; };
@@ -400,7 +399,6 @@
 		8814258A25B18EAA00961668 /* OKTipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8814241725B18EAA00961668 /* OKTipsViewController.m */; };
 		8814258B25B18EAA00961668 /* OKCreateSelectWalletTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8814241825B18EAA00961668 /* OKCreateSelectWalletTypeController.m */; };
 		8814258C25B18EAA00961668 /* OKWalletListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814241925B18EAA00961668 /* OKWalletListViewController.h */; };
-		8814258D25B18EAA00961668 /* OKAddBottomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8814241A25B18EAA00961668 /* OKAddBottomViewController.m */; };
 		8814258E25B18EAA00961668 /* OKSetWalletNameViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814241B25B18EAA00961668 /* OKSetWalletNameViewController.h */; };
 		8814258F25B18EAA00961668 /* OKTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8814241D25B18EAA00961668 /* OKTextField.h */; };
 		8814259025B18EAA00961668 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8814241E25B18EAA00961668 /* BaseTableViewController.m */; };
@@ -612,8 +610,8 @@
 		B0DC0FC92613294600DE7F46 /* OKBasicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DC0FC72613294600DE7F46 /* OKBasicTableViewController.m */; };
 		B0E0F8982613354500E72530 /* UITableViewCell+OKCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E0F8962613354500E72530 /* UITableViewCell+OKCommon.h */; };
 		B0E0F8992613354500E72530 /* UITableViewCell+OKCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E0F8972613354500E72530 /* UITableViewCell+OKCommon.m */; };
-		B0E0F89D2613641600E72530 /* OKImportMnemonicController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E0F89B2613641600E72530 /* OKImportMnemonicController.h */; };
-		B0E0F89E2613641600E72530 /* OKImportMnemonicController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E0F89C2613641600E72530 /* OKImportMnemonicController.m */; };
+		B0E0F89D2613641600E72530 /* OKCreateWalletController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E0F89B2613641600E72530 /* OKCreateWalletController.h */; };
+		B0E0F89E2613641600E72530 /* OKCreateWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E0F89C2613641600E72530 /* OKCreateWalletController.m */; };
 		B0E3FEC825EF4BA000BE4B7F /* OKAddTokenSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */; };
 		B0E3FEC925EF4BA000BE4B7F /* OKAddTokenSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */; };
 		B0E3FED725EF6B3700BE4B7F /* OKButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */; };
@@ -1099,7 +1097,6 @@
 		8814240B25B18EAA00961668 /* OKWalletListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKWalletListTableViewCell.h; sourceTree = "<group>"; };
 		8814240D25B18EAA00961668 /* WalletList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WalletList.storyboard; sourceTree = "<group>"; };
 		8814240E25B18EAA00961668 /* OKSelectImportTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSelectImportTypeViewController.h; sourceTree = "<group>"; };
-		8814240F25B18EAA00961668 /* OKAddBottomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKAddBottomViewController.h; sourceTree = "<group>"; };
 		8814241025B18EAA00961668 /* OKWalletListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKWalletListViewController.m; sourceTree = "<group>"; };
 		8814241125B18EAA00961668 /* OKCreateSelectWalletTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKCreateSelectWalletTypeController.h; sourceTree = "<group>"; };
 		8814241225B18EAA00961668 /* OKTipsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKTipsViewController.h; sourceTree = "<group>"; };
@@ -1110,7 +1107,6 @@
 		8814241725B18EAA00961668 /* OKTipsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKTipsViewController.m; sourceTree = "<group>"; };
 		8814241825B18EAA00961668 /* OKCreateSelectWalletTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKCreateSelectWalletTypeController.m; sourceTree = "<group>"; };
 		8814241925B18EAA00961668 /* OKWalletListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKWalletListViewController.h; sourceTree = "<group>"; };
-		8814241A25B18EAA00961668 /* OKAddBottomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKAddBottomViewController.m; sourceTree = "<group>"; };
 		8814241B25B18EAA00961668 /* OKSetWalletNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSetWalletNameViewController.h; sourceTree = "<group>"; };
 		8814241D25B18EAA00961668 /* OKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKTextField.h; sourceTree = "<group>"; };
 		8814241E25B18EAA00961668 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
@@ -1328,8 +1324,8 @@
 		B0E0F8962613354500E72530 /* UITableViewCell+OKCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+OKCommon.h"; sourceTree = "<group>"; };
 		B0E0F8972613354500E72530 /* UITableViewCell+OKCommon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+OKCommon.m"; sourceTree = "<group>"; };
 		B0E0F89A2613370300E72530 /* OKCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKCommonHeader.h; sourceTree = "<group>"; };
-		B0E0F89B2613641600E72530 /* OKImportMnemonicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKImportMnemonicController.h; sourceTree = "<group>"; };
-		B0E0F89C2613641600E72530 /* OKImportMnemonicController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKImportMnemonicController.m; sourceTree = "<group>"; };
+		B0E0F89B2613641600E72530 /* OKCreateWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKCreateWalletController.h; sourceTree = "<group>"; };
+		B0E0F89C2613641600E72530 /* OKCreateWalletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKCreateWalletController.m; sourceTree = "<group>"; };
 		B0E3FEC625EF4BA000BE4B7F /* OKAddTokenSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKAddTokenSheet.h; sourceTree = "<group>"; };
 		B0E3FEC725EF4BA000BE4B7F /* OKAddTokenSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKAddTokenSheet.m; sourceTree = "<group>"; };
 		B0E3FED525EF6B3700BE4B7F /* OKButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKButtonView.h; sourceTree = "<group>"; };
@@ -1571,8 +1567,8 @@
 			children = (
 				B02A49EF26159C0700D72801 /* OKWalletCreateModel.h */,
 				B02A49F026159C0700D72801 /* OKWalletCreateModel.m */,
-				B0E0F89B2613641600E72530 /* OKImportMnemonicController.h */,
-				B0E0F89C2613641600E72530 /* OKImportMnemonicController.m */,
+				B0E0F89B2613641600E72530 /* OKCreateWalletController.h */,
+				B0E0F89C2613641600E72530 /* OKCreateWalletController.m */,
 				B02A49E626148AAD00D72801 /* OKMnemonicHintTableView.h */,
 				B02A49E726148AAD00D72801 /* OKMnemonicHintTableView.m */,
 				B02A49EA2614B5E000D72801 /* OKMnemonic.h */,
@@ -2323,8 +2319,6 @@
 		8814240C25B18EAA00961668 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8814240F25B18EAA00961668 /* OKAddBottomViewController.h */,
-				8814241A25B18EAA00961668 /* OKAddBottomViewController.m */,
 				B04F6E0625DE573500FF377E /* OKBTCAddressTypeSelectController.h */,
 				B04F6E0725DE573500FF377E /* OKBTCAddressTypeSelectController.m */,
 				8814241125B18EAA00961668 /* OKCreateSelectWalletTypeController.h */,
@@ -2838,7 +2832,6 @@
 				8814257C25B18EAA00961668 /* OKSelectTableViewCell.h in Headers */,
 				B058D8A725B55663000EB27C /* OKDeviceListViewController.h in Headers */,
 				8814256D25B18EAA00961668 /* OKSelectCoinTypeTableViewCellModel.h in Headers */,
-				8814258225B18EAA00961668 /* OKAddBottomViewController.h in Headers */,
 				8814258E25B18EAA00961668 /* OKSetWalletNameViewController.h in Headers */,
 				881424F325B18EAA00961668 /* OKWalletViewController.h in Headers */,
 				8814243725B18EAA00961668 /* OKPwdViewController.h in Headers */,
@@ -2958,7 +2951,7 @@
 				8814243525B18EAA00961668 /* OKCreateResultModel.h in Headers */,
 				8814246F25B18EAA00961668 /* OKVerifySignatureViewController.h in Headers */,
 				8814247725B18EAA00961668 /* DSCallInfo.h in Headers */,
-				B0E0F89D2613641600E72530 /* OKImportMnemonicController.h in Headers */,
+				B0E0F89D2613641600E72530 /* OKCreateWalletController.h in Headers */,
 				881424F525B18EAA00961668 /* OKTxListViewController.h in Headers */,
 				881424E925B18EAA00961668 /* OKUnitTableViewCell.h in Headers */,
 				B058D8AA25B55663000EB27C /* OKDeviceLanguageViewController.h in Headers */,
@@ -3508,7 +3501,6 @@
 				881425A225B2DF7200961668 /* OKDiscoverNewDeviceViewController.m in Sources */,
 				881425B225B5BD2C00961668 /* OKHWCompleteCopyViewController.m in Sources */,
 				88B8A53E260682DA00F38ADA /* UIControl.swift in Sources */,
-				8814258D25B18EAA00961668 /* OKAddBottomViewController.m in Sources */,
 				881424D225B18EAA00961668 /* OKTradeSettingViewCellModel.m in Sources */,
 				881424A725B18EAA00961668 /* OKLanguageViewController.m in Sources */,
 				97B84B989EEFF9FA6E446899 /* UIView+Helper.m in Sources */,
@@ -3548,7 +3540,7 @@
 				B0E0F8992613354500E72530 /* UITableViewCell+OKCommon.m in Sources */,
 				BEA2428F980CDB93F6B81AB8 /* UIView+Toast.m in Sources */,
 				B000CA6D25F0EF58007B3985 /* OKAllAssetsCellModel.m in Sources */,
-				B0E0F89E2613641600E72530 /* OKImportMnemonicController.m in Sources */,
+				B0E0F89E2613641600E72530 /* OKCreateWalletController.m in Sources */,
 				8814247925B18EAA00961668 /* JSBUtil.m in Sources */,
 				8814243D25B18EAA00961668 /* CLPasswordView.m in Sources */,
 				8814244425B18EAA00961668 /* OKValidationPwdController.m in Sources */,

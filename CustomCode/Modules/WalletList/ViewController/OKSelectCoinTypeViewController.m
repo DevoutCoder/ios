@@ -12,6 +12,8 @@
 #import "OKSetWalletNameViewController.h"
 #import "OKSelectImportTypeViewController.h"
 #import "OKBTCAddressTypeSelectController.h"
+#import "OKCreateWalletController.h"
+
 
 @interface OKSelectCoinTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -78,43 +80,25 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OKWeakSelf(self)
     NSString *coinType = self.coinTypeListArray[indexPath.row];
     if (_addType == OKAddTypeCreateHDDerived || _addType == OKAddTypeCreateSolo || _addType == OKAddTypeCreateHWDerived) {
-        [self getCoin:coinType AddressType:^(OKBTCAddressType btcAddressType) {
-            OKSetWalletNameViewController *setWalletNameVc = [OKSetWalletNameViewController setWalletNameViewController];
-            setWalletNameVc.addType = weakself.addType;
-            setWalletNameVc.coinType = coinType;
-            setWalletNameVc.where = weakself.where;
-            setWalletNameVc.btcAddressType = btcAddressType;
-            [weakself.navigationController pushViewController:setWalletNameVc animated:YES];
-        }];
+        OKCreateWalletController *mnemonicImportVc = [OKCreateWalletController controllerWithStoryboard];
+        OKWalletCreateModel *model = [[OKWalletCreateModel alloc] init];
+        model.addType = _addType;
+        model.coinType = coinType;
+        mnemonicImportVc.model = model;
+        [self.navigationController pushViewController:mnemonicImportVc animated:YES];
+
     }else if (_addType == OKAddTypeImport){
         OKSelectImportTypeViewController *selectImportTypeVc = [OKSelectImportTypeViewController selectImportTypeViewController];
         selectImportTypeVc.coinType = coinType;
         [self.navigationController pushViewController:selectImportTypeVc animated:YES];
     }
 }
+
 -(NSArray *)coinTypeListArray
 {
     return kWalletManager.supportCoinArray;
 }
 
-- (void)getCoin:(NSString *)coinType AddressType:(void(^)(OKBTCAddressType btcAddressType))callback {
-    if (!callback) { return; }
-
-    coinType = coinType.lowercaseString;
-    if (![coinType isEqualToString:@"btc"]) {
-        callback(OKBTCAddressTypeNotBTC);
-        return;
-    }
-
-    OKWeakSelf(self)
-    OKBTCAddressTypeSelectController *vc = [OKBTCAddressTypeSelectController viewControllerWithStoryboard];
-    vc.callback = ^(OKBTCAddressType type) {
-        [weakself.navigationController dismissViewControllerAnimated:YES completion:nil];
-        callback(type);
-    };
-    [self.navigationController presentViewController:vc animated:YES completion:nil];
-}
 @end

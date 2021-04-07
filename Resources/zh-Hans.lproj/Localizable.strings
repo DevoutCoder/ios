@@ -41,6 +41,7 @@
 "The wallet list" = "账户列表";
 "Create a wallet" = "创建账户";
 "Set the wallet name" = "设置账户名称";
+"Setup wallet" = "设置账户";
 "Easy for you to identify" = "方便您轻松识别";
 "Import a single currency wallet" = "导入单币种账户";
 "Select the currency" = "选择币种";
@@ -167,7 +168,6 @@
 "Return the wallet" = "返回钱包";
 "The mnemonic is incorrect" = "助记词有误";
 "To check the" = "重新核对";
-"Set the wallet name" = "设置账户名称";
 //OKScanVc
 "Scan QR Code" = "扫描二维码";
 "scan.result" = "扫描结果";
@@ -623,10 +623,12 @@
 "The operation failure" = "操作失败";
 
 "import" = "导入";
+"import.method" = "选择添加新账户的方式";
 "import.mnemonic.warring" = "请勿导入 OneKey 硬件钱包的助记词。这样做存在安全隐患。";
 "import.mnemonic.tip" = "导入的私密数据将加密存储在本地设备中，永不触网。OneKey 服务器不会存储你的任何私密数据。";
 "import.mnemonic.tip2" = "输入 12/18/24 位助记词，并用空格分隔";
 "import.path.tip" = "同一套助记词设置不同路径可生成不同的账户地址。请务必记住自定义路径，输入错误的路径将无法找到地址。";
+"import.path.tipHD" = "主钱包派生账户的路径不可更改。";
 "import.advance" = "高级设置";
 "import.path" = "路径";
 "import.btc.addresstype" = "账户地址类型选择后无法更改，推荐选择隔离见证（兼容） SegWit。

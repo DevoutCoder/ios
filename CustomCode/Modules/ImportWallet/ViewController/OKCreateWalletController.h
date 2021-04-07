@@ -11,11 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OKImportMnemonicController : BaseViewController
+@interface OKCreateWalletController : BaseViewController
 @property (nonatomic, strong) OKWalletCreateModel *model;
-
-//@property (nonatomic, assign) OKAddType importType;
-//@property (nonatomic, copy) NSString *coinType;
 + (instancetype)controllerWithStoryboard;
 @end
 

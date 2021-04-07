@@ -15,13 +15,13 @@
 #import "OKMnemonicImportViewController.h"
 #import "OKKeystoreImportViewController.h"
 #import "OKObserveImportViewController.h"
-#import "OKImportMnemonicController.h"
+#import "OKCreateWalletController.h"
 
 @interface OKSelectImportTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic,strong)NSArray *coinTypeListArray;
+@property (nonatomic,strong)NSArray <OKSelectCoinTypeTableViewCellModel *>*coinTypeListArray;
 
 @end
 
@@ -79,15 +79,6 @@
             [self.navigationController pushViewController:privateImportVc animated:YES];
         }
             break;
-        case 1:
-        {
-//            OKImportMnemonicController *mnemonicImportVc = [OKImportMnemonicController controllerWithStoryboard];
-            OKMnemonicImportViewController *mnemonicImportVc = [OKMnemonicImportViewController mnemonicImportViewController];
-            mnemonicImportVc.importType = OKAddTypeImportSeed;
-            mnemonicImportVc.coinType = self.coinType;
-            [self.navigationController pushViewController:mnemonicImportVc animated:YES];
-        }
-            break;
         case 2:
         {
             OKObserveImportViewController *observeImportVc = [OKObserveImportViewController observeImportViewController];
@@ -104,7 +95,14 @@
             [self.navigationController pushViewController:keystoreImportVc animated:YES];
         }
             break;
-        default:
+        default: {
+            OKWalletCreateModel *model = [[OKWalletCreateModel alloc] init];
+            model.addType = self.coinTypeListArray[indexPath.row].addtType;
+            model.coinType = self.coinType;
+            OKCreateWalletController *mnemonicImportVc = [OKCreateWalletController controllerWithStoryboard];
+            mnemonicImportVc.model = model;
+            [self.navigationController pushViewController:mnemonicImportVc animated:YES];
+        }
             break;
     }
 }
@@ -116,18 +114,23 @@
         OKSelectCoinTypeTableViewCellModel *model = [OKSelectCoinTypeTableViewCellModel new];
         model.titleString = MyLocalizedString(@"Private key import (direct input or scan)", nil);
         model.iconName = @"private_key_import";
+        model.addtType = OKAddTypeImportPrivkeys;
 
         OKSelectCoinTypeTableViewCellModel *model1 = [OKSelectCoinTypeTableViewCellModel new];
         model1.titleString = MyLocalizedString(@"Mnemonic import", nil);
         model1.iconName = @"memo_import";
+        model1.addtType = OKAddTypeImportSeed;
 
         OKSelectCoinTypeTableViewCellModel *model3 = [OKSelectCoinTypeTableViewCellModel new];
         model3.titleString = MyLocalizedString(@"Observe the purse", nil);
         model3.iconName = @"watch_only_wallet";
+        model3.addtType = OKAddTypeImportAddresses;
 
         OKSelectCoinTypeTableViewCellModel *model2 = [OKSelectCoinTypeTableViewCellModel new];
         model2.titleString = MyLocalizedString(@"Keystore import", nil);
         model2.iconName = @"keystore_import";
+        model2.addtType = OKAddTypeImportKeystore;
+
         if ([kWalletManager isETHClassification:self.coinType]) {
             _coinTypeListArray = @[model,model1,model3,model2];
         }else{

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OKMnemonic : NSObject
 @property (strong, nonatomic) NSArray <NSString *>*mnemonic;
 - (NSArray <NSString *>*)hintsWithPrefix:(nullable NSString *)prefix;
++ (nullable NSString *)checkMnemnoic:(NSString*)mnc;
 @end
 
 NS_ASSUME_NONNULL_END

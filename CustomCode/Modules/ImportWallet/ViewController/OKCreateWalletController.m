@@ -6,13 +6,13 @@
 //  Copyright © 2021 Onekey. All rights reserved.
 //
 
-#import "OKImportMnemonicController.h"
+#import "OKCreateWalletController.h"
 #import "OKMnemonicHintTableView.h"
 #import "OKMnemonic.h"
 
 static const CGFloat advanceCellHeight = 44;
 
-@interface OKImportMnemonicController () <UITableViewDelegate, UITextViewDelegate>
+@interface OKCreateWalletController () <UITableViewDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet OKButtonView *btcAddrTypeView;
 @property (weak, nonatomic) IBOutlet UIView *pathView;
@@ -24,7 +24,7 @@ static const CGFloat advanceCellHeight = 44;
 @property (weak, nonatomic) IBOutlet UITextField *pathField;
 @property (weak, nonatomic) IBOutlet OKButtonView *importBtn;
 
-@property (weak, nonatomic) IBOutlet OKMnemonicHintTableView *tableView;
+@property (weak, nonatomic) IBOutlet OKMnemonicHintTableView *hintTableView;
 
 @property (nonatomic, strong) OKMnemonic *mnemonicUtilty;
 
@@ -32,25 +32,29 @@ static const CGFloat advanceCellHeight = 44;
 @property (weak, nonatomic) IBOutlet UILabel *btcTypeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipHeight;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerH;
+@property (weak, nonatomic) IBOutlet UIView *mncContainer;
 @end
 
-@implementation OKImportMnemonicController
+@implementation OKCreateWalletController
 + (instancetype)controllerWithStoryboard {
     return [[UIStoryboard storyboardWithName:@"Import" bundle:nil] instantiateViewControllerWithIdentifier:@"OKImportMnemonicController"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.btcType = OKBTCAddressTypeSegwit;
+
+    self.model = self.model ?: [[OKWalletCreateModel alloc] init];
+    self.model.delegate = self;
     self.mnemonicUtilty = [[OKMnemonic alloc] init];
-    
+    self.btcType = OKBTCAddressTypeSegwit;
+
     self.scrollView.delegate = self;
     OKWeakSelf(self)
     self.btcAddrTypeView.buttonClick = ^{
         [weakself selectBtcAddress];
     };
-    
+
     [self.importBtn setLayerRadius:8];
     self.importBtn.buttonClick = ^{
         [weakself import];
@@ -59,24 +63,41 @@ static const CGFloat advanceCellHeight = 44;
 }
 
 - (void)setupUI {
-    self.title = @"import mnemonic".localized;
+
+    self.nameField.placeholder = self.model.defaultWalletName;
+
+    switch (self.model.addType) {
+        case OKAddTypeImportSeed: {
+            self.title = @"import mnemonic".localized;
+            self.textView.delegate = self;
+            self.hintTableView.delegate = self;
+            [self.hintTableView makeRotationWithAngle: -90];
+            self.hintTableView.textView = self.textView;
+            self.hintTableView.hints = [self.mnemonicUtilty hintsWithPrefix:nil];
+            self.hintTableView.frame = CGRectMake(0, self.view.height * 2, self.view.width, 48);
+        } break;
+
+        default: {
+            self.title = @"Setup wallet".localized;
+        } break;
+    }
+
+    if (self.model.addType != OKAddTypeImportSeed) {
+        self.hintTableView.hidden = YES;
+        self.mncContainer.hidden =  YES;
+        self.containerH.constant = 0;
+    }
 
     self.containerViewHeight.constant = advanceCellHeight;
     self.btcAddrTypeView.alpha = 0;
     self.pathView.alpha = 0;
     self.tipHeight.constant = 0;
     self.advanceSwitch.on = NO;
-    
-    self.textView.delegate = self;
-    self.tableView.delegate = self;
-    [self.tableView makeRotationWithAngle: -90];
-    self.tableView.textView = self.textView;
-    self.tableView.hints = [self.mnemonicUtilty hintsWithPrefix:nil];
-    self.tableView.frame = CGRectMake(0, self.view.height * 2, self.view.width, 48);
 }
 
 - (IBAction)showAdvance:(id)sender {
-    
+
+    [kTools tipMessage:@"暂不支持自定义路径"];
     BOOL isBTC = self.model.walletCoinType == OKWalletCoinTypeBTC;
     [UIView animateWithDuration:0.25 animations:^{
         if (self.advanceSwitch.isOn) {
@@ -96,11 +117,14 @@ static const CGFloat advanceCellHeight = 44;
 }
 
 - (void)import {
-    
+    self.model.walletName = self.nameField.text;
+    if (self.model.addType == OKAddTypeImportSeed) {
+        NSString *mnc = [OKMnemonic checkMnemnoic:self.textView.text];
+        if (!mnc) { return; }
+        self.model.mnemonic = mnc;
+    }
+    [self.model create];
 }
-
-
-
 
 #pragma mark - BTC 相关
 - (void)setBtcType:(OKBTCAddressType)btcType {
@@ -151,17 +175,17 @@ static const CGFloat advanceCellHeight = 44;
         textView.text = [text substringToIndex:text.length - 1];
         return;
     }
-    
+
     NSString *textToCursor = [text substringToIndex:[self cursorPosition]];
     NSArray *texts = [textToCursor componentsSeparatedByString:@" "];
-    
-    self.tableView.hints = [self.mnemonicUtilty hintsWithPrefix:texts.lastObject];
-    [self.tableView reloadData];
-    
-    if (self.tableView.hints.count) {
+
+    self.hintTableView.hints = [self.mnemonicUtilty hintsWithPrefix:texts.lastObject];
+    [self.hintTableView reloadData];
+
+    if (self.hintTableView.hints.count) {
         NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            [self.hintTableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionTop animated:NO];
         });
     }
 }
@@ -171,28 +195,28 @@ static const CGFloat advanceCellHeight = 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.tableView.hints[indexPath.row] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}].width + 30;
+    return [self.hintTableView.hints[indexPath.row] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}].width + 30;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [kOKHaptic impactOccurredLight];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (tableView != self.tableView) {
+    if (tableView != self.hintTableView) {
         return;
     }
-    
+
     NSString *textToCursor = [self.textView.text substringToIndex:[self cursorPosition]];
-    
-    NSString *hint = self.tableView.hints[indexPath.row];
-    
+
+    NSString *hint = self.hintTableView.hints[indexPath.row];
+
     NSString *text = [textToCursor componentsSeparatedByString:@" "].lastObject;
     hint = [hint substringFromIndex:text.length];
     hint = [hint stringByAppendingString:@" "];
     NSMutableString *mutStr = [NSMutableString stringWithString:self.textView.text];
     [mutStr insertString:hint atIndex:[self cursorPosition]];
     UITextPosition *cur = [self.textView positionFromPosition:self.textView.beginningOfDocument offset:[self cursorPosition] + hint.length];
-    
+
     self.textView.text = mutStr;
     [self.textView offsetFromPosition:self.textView.beginningOfDocument toPosition:self.textView.selectedTextRange.start];
     if (cur) {

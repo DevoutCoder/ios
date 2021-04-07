@@ -204,4 +204,8 @@
     return result.length ? result : @"";
 }
 
+- (NSString *)trim {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 @end

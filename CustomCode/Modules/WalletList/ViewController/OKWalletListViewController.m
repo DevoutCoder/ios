@@ -13,7 +13,6 @@
 #import "OKWalletListCollectionViewCell.h"
 #import "OKWalletListCollectionViewCellModel.h"
 #import "OKSelectCoinTypeViewController.h"
-#import "OKAddBottomViewController.h"
 #import "OKCreateSelectWalletTypeController.h"
 #import "OKWalletDetailViewController.h"
 #import "OKTipsViewController.h"
@@ -318,19 +317,26 @@
 
 - (IBAction)addWalletBtnClick:(OKWalletListBottomBtn *)sender {
     OKWeakSelf(self);
-    OKAddBottomViewController *vc = [OKAddBottomViewController initViewControllerWithStoryboardName:@"WalletList"];
-    [vc showOnWindowWithParentViewController:self block:^(BtnClickType type) {
-        if (type == BtnClickTypeCreate) {
+    OKActionSheetController *sheet = [OKActionSheetController controllerWithStoryboard];
+    sheet.entries = @[@"Create account".localized, @"import".localized];
+    sheet.titleText = @"import.method".localized;
+    sheet.callback = ^(BOOL cancel, NSInteger index) {
+        if (cancel) {
+            return;
+        }
+        if (index == 0) {
             OKCreateSelectWalletTypeController *createSelectWalletTypeVc = [OKCreateSelectWalletTypeController createSelectWalletTypeController];
             createSelectWalletTypeVc.haveHD = weakself.haveHD;
             [weakself.navigationController pushViewController:createSelectWalletTypeVc animated:YES];
-        }else if (type == BtnClickTypeImport){
+        } else if (index == 1) {
             OKSelectCoinTypeViewController *selectVc = [OKSelectCoinTypeViewController selectCoinTypeViewController];
             selectVc.addType = OKAddTypeImport;
             selectVc.where = OKWhereToSelectTypeWalletList;
             [weakself.navigationController pushViewController:selectVc animated:YES];
         }
-    }];
+    };
+    sheet.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self.navigationController presentViewController:sheet animated:NO completion:nil];
 }
 
 #pragma mark -collectionview 数据源方法
