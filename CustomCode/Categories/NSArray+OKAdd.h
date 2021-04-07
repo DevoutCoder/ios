@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSArray (OKAdd)
-- (NSArray *)ok_map:(id(^)(id obj))mapBlock;
-- (NSArray *)ok_filter:(BOOL(^)(id obj))filterBlock;
+@interface NSArray<__covariant T> (OKAdd)
+- (NSArray <T>*)ok_map:(T(^)(T item))mapBlock;
+- (NSArray <T>*)ok_filter:(BOOL(^)(T item))filterBlock;
+
 - (NSArray *)ok_padding:(id)item to:(NSUInteger)idealCount;
 @end

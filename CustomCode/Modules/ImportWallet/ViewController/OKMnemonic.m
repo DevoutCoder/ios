@@ -14,13 +14,12 @@ static const NSUInteger HINT_CAPACITY = 10;
 
 + (NSString *)checkMnemnoic:(NSString *)mnc {
 
-    NSArray *mncs = [mnc.trim split:@" "];
-    mncs = [mncs ok_map:^id(id obj) {
-        return ((NSString *)obj).trim;
-    }];
+    NSArray <NSString *>*mncs = [mnc.trim split:@" "];
 
-    mncs = [mncs ok_filter:^BOOL(id obj) {
-        return ((NSString *)obj).length;
+    mncs = [[mncs ok_map:^NSString *(NSString *item) {
+        return item.trim;
+    }] ok_filter:^BOOL(NSString *item) {
+        return item.length;
     }];
 
     if (mncs.count != 12 &&

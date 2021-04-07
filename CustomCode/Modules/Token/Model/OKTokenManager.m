@@ -67,9 +67,9 @@ static dispatch_once_t once;
 
 - (NSArray <NSString *>*)currentAddress {
     if (!_currentAddress || self.needUpdateCurrentAddress) {
-        NSArray *array = [kPyCommandsManager callInterface:kInterface_get_cur_wallet_token_address parameter:@{}];
-        _currentAddress = [array ok_map:^id(id obj) {
-            return ((NSString *)obj).lowercaseString;
+        NSArray <NSString *>*array = [kPyCommandsManager callInterface:kInterface_get_cur_wallet_token_address parameter:@{}];
+        _currentAddress = [array ok_map:^NSString *(NSString *obj) {
+            return obj.lowercaseString;
         }];
         self.needUpdateCurrentAddress = NO;
     }
