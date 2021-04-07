@@ -633,3 +633,9 @@
 "import.path" = "路径";
 "import.btc.addresstype" = "账户地址类型选择后无法更改，推荐选择隔离见证（兼容） SegWit。
 隔离见证（兼容） SegWit，生成的地址以 3 开头，已广泛普及，转账手续费较低。隔离见证（原生）Native SegWit 以 bc1 开头，目前正在普及，手续费最低。普通地址 Legacy 以 1开头，手续费略高。";
+
+"See more records" = "查看更多记录  ";
+"See more" = "查看更多  ";
+
+
+

@@ -90,6 +90,9 @@
 
 
 #define kInterfaceverify_legality        @"verify_legality"  //验证格式
+#define kInterfaceGet_detail_tx_info_by_hash  @"get_detail_tx_info_by_hash"  //详细的 Input、Output
+
+
 
 //硬件相关
 #define kBluetooth_iOS                   @"bluetooth_ios"

@@ -8,7 +8,7 @@
 
 #import "OKTxDetailViewController.h"
 #import "OKTxTableViewCellModel.h"
-
+#import "OKTxDetailSeeMoreView.h"
 @interface OKTxDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *statusIcon;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
@@ -35,6 +35,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *txDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *seeMoreButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sureNumberConstraint;
+@property (nonatomic,strong)  OKTxDetailSeeMoreView *moreView;
+
 
 - (IBAction)blockNumBtnClick:(UIButton *)sender;
 - (IBAction)txHashBtnClick:(UIButton *)sender;
@@ -70,6 +74,14 @@
     [self.fromAddressBg setLayerBoarderColor:HexColor(0xF2F2F2) width:1 radius:30];
     [self.toBg setLayerBoarderColor:HexColor(0xF2F2F2) width:1 radius:20];
     [self.toAddressBg setLayerBoarderColor:HexColor(0xF2F2F2) width:1 radius:30];
+    if ([[kWalletManager getUnitForCoinType] isEqualToString:COIN_BTC]) {
+        self.seeMoreButton.semanticContentAttribute = 4;
+        [self.seeMoreButton setTitle:@"See more".localized forState:UIControlStateNormal];
+        self.sureNumberConstraint.constant = 54;
+    }else{
+        self.seeMoreButton.hidden = YES;
+        self.sureNumberConstraint.constant = 26;
+    }
 
 
     UITapGestureRecognizer *tapFrom = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFrom)];
@@ -197,5 +209,15 @@
     NSString *url = [kWalletManager getBrowseAddressUrlTxHash:txId];
     WebViewVC *vc = [WebViewVC loadWebViewControllerWithTitle:nil url:url];
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)seeMoreButtonClick:(UIButton *)sender {
+    self.moreView = [[OKTxDetailSeeMoreView alloc] initWithFrame: self.view.bounds];
+    self.moreView.tx_hash = self.tx_hash;
+    [self.navigationController.view addSubview:self.moreView];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    //左滑移除
+    [self.moreView removeFromSuperview];
 }
 @end

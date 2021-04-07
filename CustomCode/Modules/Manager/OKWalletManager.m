@@ -387,7 +387,21 @@ static dispatch_once_t once;
         return @"";
     }
 }
-
+-  (NSString *)getBrowseUrlWithCurrentWalletAddress {
+    NSString* address = kWalletManager.currentWalletInfo.addr;
+    NSString *coinType = [kWalletManager.currentWalletInfo.coinType uppercaseString];
+    if ([coinType isEqualToString:COIN_BTC]) {
+        return [@"https://btc.com/" stringByAppendingString: address];
+    }else if ([coinType isEqualToString:COIN_ETH]){
+        return [@"https://cn.etherscan.com/address/" stringByAppendingString: address];
+    }else if ([coinType isEqualToString:COIN_HECO]){
+        return [@"https://hecoinfo.com/address/" stringByAppendingString: address];
+    }else if ([coinType isEqualToString:COIN_BSC]){
+        return [@"https://bscscan.com/address/" stringByAppendingString: address];
+    }else{
+        return @"";
+    }
+}
 - (NSDictionary *)unitIsDifferentDict
 {
     if (!_unitIsDifferentDict) {

@@ -438,6 +438,13 @@
 		882F8B5325F749FF004099D7 /* OKNotiAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 882F8B5125F749FF004099D7 /* OKNotiAssetModel.m */; };
 		8832128F260496D100A0314E /* OKSwitchWalletModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8832128D260496D100A0314E /* OKSwitchWalletModel.h */; };
 		88321290260496D100A0314E /* OKSwitchWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8832128E260496D100A0314E /* OKSwitchWalletModel.m */; };
+		8838790A261D946400A13AEC /* OKTxDetailSeeMoreCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 88387907261D946400A13AEC /* OKTxDetailSeeMoreCell.h */; };
+		8838790B261D946400A13AEC /* OKTxDetailSeeMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88387908261D946400A13AEC /* OKTxDetailSeeMoreCell.m */; };
+		8838790C261D946400A13AEC /* OKTxDetailSeeMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88387909261D946400A13AEC /* OKTxDetailSeeMoreCell.xib */; };
+		8838790F261DA9E400A13AEC /* OKTxDetailSeeMoreModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838790D261DA9E400A13AEC /* OKTxDetailSeeMoreModel.h */; };
+		88387910261DA9E400A13AEC /* OKTxDetailSeeMoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8838790E261DA9E400A13AEC /* OKTxDetailSeeMoreModel.m */; };
+		88387913261DC7A500A13AEC /* OKTxDetailSeeMoreView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88387911261DC7A500A13AEC /* OKTxDetailSeeMoreView.h */; };
+		88387914261DC7A500A13AEC /* OKTxDetailSeeMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88387912261DC7A500A13AEC /* OKTxDetailSeeMoreView.m */; };
 		883FFA8B2605C9550079DC96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883FFA8A2605C9550079DC96 /* ViewController.swift */; };
 		883FFB62260618D20079DC96 /* PanModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883FFB61260618D20079DC96 /* PanModalViewController.swift */; };
 		883FFB6426061CA30079DC96 /* PanModalNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883FFB6326061CA30079DC96 /* PanModalNavViewController.swift */; };
@@ -1147,6 +1154,13 @@
 		882F8B5125F749FF004099D7 /* OKNotiAssetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKNotiAssetModel.m; sourceTree = "<group>"; };
 		8832128D260496D100A0314E /* OKSwitchWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKSwitchWalletModel.h; sourceTree = "<group>"; };
 		8832128E260496D100A0314E /* OKSwitchWalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKSwitchWalletModel.m; sourceTree = "<group>"; };
+		88387907261D946400A13AEC /* OKTxDetailSeeMoreCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKTxDetailSeeMoreCell.h; sourceTree = "<group>"; };
+		88387908261D946400A13AEC /* OKTxDetailSeeMoreCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKTxDetailSeeMoreCell.m; sourceTree = "<group>"; };
+		88387909261D946400A13AEC /* OKTxDetailSeeMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OKTxDetailSeeMoreCell.xib; sourceTree = "<group>"; };
+		8838790D261DA9E400A13AEC /* OKTxDetailSeeMoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKTxDetailSeeMoreModel.h; sourceTree = "<group>"; };
+		8838790E261DA9E400A13AEC /* OKTxDetailSeeMoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKTxDetailSeeMoreModel.m; sourceTree = "<group>"; };
+		88387911261DC7A500A13AEC /* OKTxDetailSeeMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKTxDetailSeeMoreView.h; sourceTree = "<group>"; };
+		88387912261DC7A500A13AEC /* OKTxDetailSeeMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKTxDetailSeeMoreView.m; sourceTree = "<group>"; };
 		883FFA8A2605C9550079DC96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		883FFB61260618D20079DC96 /* PanModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalViewController.swift; sourceTree = "<group>"; };
 		883FFB6326061CA30079DC96 /* PanModalNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalNavViewController.swift; sourceTree = "<group>"; };
@@ -2089,6 +2103,8 @@
 				882F8B5125F749FF004099D7 /* OKNotiAssetModel.m */,
 				8832128D260496D100A0314E /* OKSwitchWalletModel.h */,
 				8832128E260496D100A0314E /* OKSwitchWalletModel.m */,
+				8838790D261DA9E400A13AEC /* OKTxDetailSeeMoreModel.h */,
+				8838790E261DA9E400A13AEC /* OKTxDetailSeeMoreModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2109,6 +2125,11 @@
 				8814238B25B18EA900961668 /* OKWalletInputFeeView.h */,
 				8814239325B18EA900961668 /* OKWalletInputFeeView.m */,
 				8814239525B18EA900961668 /* OKWalletDetailTableViewCell.m */,
+				88387907261D946400A13AEC /* OKTxDetailSeeMoreCell.h */,
+				88387908261D946400A13AEC /* OKTxDetailSeeMoreCell.m */,
+				88387909261D946400A13AEC /* OKTxDetailSeeMoreCell.xib */,
+				88387911261DC7A500A13AEC /* OKTxDetailSeeMoreView.h */,
+				88387912261DC7A500A13AEC /* OKTxDetailSeeMoreView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3014,6 +3035,8 @@
 				8814255425B18EAA00961668 /* OKScreenshotsTipsController.h in Headers */,
 				881424A025B18EAA00961668 /* OKHDWalletViewController.h in Headers */,
 				F6994A4E9A519CE1B696A034 /* NSString+OKAdd.h in Headers */,
+				8838790A261D946400A13AEC /* OKTxDetailSeeMoreCell.h in Headers */,
+				8838790F261DA9E400A13AEC /* OKTxDetailSeeMoreModel.h in Headers */,
 				B0EB9B8625FA24270098092B /* OKQRScanResultController.h in Headers */,
 				B058D8AD25B55663000EB27C /* OKDeviceVerifyResultController.h in Headers */,
 				8814253325B18EAA00961668 /* OKShareView.h in Headers */,
@@ -3061,6 +3084,7 @@
 				8814243125B18EAA00961668 /* OKKeystoreImportViewController.h in Headers */,
 				8814247525B18EAA00961668 /* DWKWebView.h in Headers */,
 				8814245925B18EAA00961668 /* OKDeviceSuccessViewController.h in Headers */,
+				88387913261DC7A500A13AEC /* OKTxDetailSeeMoreView.h in Headers */,
 				8814243425B18EAA00961668 /* YZAuthID.h in Headers */,
 				8814257225B18EAA00961668 /* OKWalletListCollectionViewCell.h in Headers */,
 				8814250025B18EAA00961668 /* OKDefaultFeeInfoModel.h in Headers */,
@@ -3177,6 +3201,7 @@
 				88B8A532260650FA00F38ADA /* PanBottomAlertViewController.xib in Resources */,
 				881424CA25B18EAA00961668 /* NetSeting.storyboard in Resources */,
 				BA578E2F25ACA68700EFE0AA /* Images.xcassets in Resources */,
+				8838790C261D946400A13AEC /* OKTxDetailSeeMoreCell.xib in Resources */,
 				BA578E2B25ACA43D00EFE0AA /* OneKey-Info.plist in Resources */,
 				8814254225B18EAA00961668 /* Scan.storyboard in Resources */,
 				B058D8AC25B55663000EB27C /* HardwareSetting.storyboard in Resources */,
@@ -3296,6 +3321,7 @@
 				FD8A490DA5395F6BD54C9E32 /* MainViewController.m in Sources */,
 				8814245D25B18EAA00961668 /* OKActivateDeviceSelectViewController.m in Sources */,
 				881424BB25B18EAA00961668 /* OKElectrumNodeViewController.m in Sources */,
+				88387910261DA9E400A13AEC /* OKTxDetailSeeMoreModel.m in Sources */,
 				8814242E25B18EAA00961668 /* OKMnemonicImportViewController.m in Sources */,
 				CED40A5F2604AFFE0095D600 /* Error.swift in Sources */,
 				CE326E0D2601FD4B00CA54E2 /* DAppTransaction.swift in Sources */,
@@ -3387,6 +3413,7 @@
 				8814250525B18EAA00961668 /* OKWalletDetailModel.m in Sources */,
 				E0ED4DD8A9FD5798013881F1 /* UIBarButtonItem+CustomBarButtonItem.m in Sources */,
 				8814258725B18EAA00961668 /* OKSetWalletNameViewController.m in Sources */,
+				88387914261DC7A500A13AEC /* OKTxDetailSeeMoreView.m in Sources */,
 				8814252325B18EAA00961668 /* OKDocument.m in Sources */,
 				B058D8A625B55663000EB27C /* OKDeviceListCellModel.m in Sources */,
 				8864AEB225E6081100459C4E /* OKSelectAssetTypeModel.m in Sources */,
@@ -3506,6 +3533,7 @@
 				97B84B989EEFF9FA6E446899 /* UIView+Helper.m in Sources */,
 				B0DC0FC92613294600DE7F46 /* OKBasicTableViewController.m in Sources */,
 				8814259425B18EAA00961668 /* OKLabel.m in Sources */,
+				8838790B261D946400A13AEC /* OKTxDetailSeeMoreCell.m in Sources */,
 				B01CB1D525C12F9A0099F931 /* WKWebView+Bypass.m in Sources */,
 				888C9D3F260A544200EB4978 /* UIImageView.swift in Sources */,
 				8814258825B18EAA00961668 /* OKSelectImportTypeViewController.m in Sources */,
@@ -3699,8 +3727,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ../Support/OneKey.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 4000003;
 				DEFINES_MODULE = YES;
@@ -3782,7 +3810,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = so.onekey.testflight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = OneKeyTest;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/../CustomCode/OneKey-Bridging-Header.h";
@@ -3805,8 +3833,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ../Support/OneKey.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 4000003;
 				DEFINES_MODULE = YES;
@@ -3891,7 +3919,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = so.onekey.testflight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = OneKeyTest;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/../CustomCode/OneKey-Bridging-Header.h";

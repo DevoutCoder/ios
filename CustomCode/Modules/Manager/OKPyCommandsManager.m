@@ -199,18 +199,20 @@ static dispatch_once_t once;
         NSString *search_type = [parameter safeStringForKey:@"search_type"];
         NSString *coin = [parameter safeStringForKey:@"coin"];
         NSString *contract_address = [parameter safeStringForKey:@"contract_address"];
+        NSInteger start = [[parameter safeStringForKey:@"start"] intValue];
+        NSInteger end = [[parameter safeStringForKey:@"end"] intValue];
         if (coin.length == 0 || coin == nil) {
             coin = @"btc";
         }
         PyObject *args =  Py_BuildValue("()");
         PyObject *kwargs;
         if (contract_address.length > 0) {
-            kwargs = Py_BuildValue("{s:s,s:s,s:s}", "coin", [coin UTF8String],"search_type",[search_type UTF8String],"contract_address",[contract_address UTF8String]);
+            kwargs = Py_BuildValue("{s:s,s:s,s:s,s:i,s:i}", "coin", [coin UTF8String],"search_type",[search_type UTF8String],"contract_address",[contract_address UTF8String],"start",start,"end",end);
         }else{
             if (search_type.length == 0) {
-                kwargs = Py_BuildValue("{s:s}", "coin", [coin UTF8String]);
+                kwargs = Py_BuildValue("{s:s,s:i,s:i}", "coin", [coin UTF8String],"start",start,"end",end);
             }else{
-                kwargs = Py_BuildValue("{s:s,s:s}", "coin", [coin UTF8String],"search_type",[search_type UTF8String]);
+                kwargs = Py_BuildValue("{s:s,s:s,s:i,s:i}", "coin", [coin UTF8String],"search_type",[search_type UTF8String],"start",start,"end",end);
             }
         }
         PyObject *myobject_method = PyObject_GetAttrString(self.pyInstance, [kInterfaceGet_all_tx_list UTF8String]);
@@ -638,6 +640,11 @@ static dispatch_once_t once;
         NSString *message = [parameter safeStringForKey:@"message"];
         result = PyObject_CallMethod(self.pyInstance, [kInterface_dapp_eth_keccak UTF8String], "(s)", [message UTF8String]);
     }
+    else if ([method isEqualToString:kInterfaceGet_detail_tx_info_by_hash]){
+        NSString *tx_hash = [parameter safeStringForKey:@"tx_hash"];
+        result = PyObject_CallMethod(self.pyInstance,[kInterfaceGet_detail_tx_info_by_hash UTF8String],"(s)",[tx_hash UTF8String]);
+    }
+    
     OKPY_METHOD_CASE(kInterface_add_token) {
         NSString *symbol = [parameter safeStringForKey:@"symbol"];
         NSString *contract_addr = [parameter safeStringForKey:@"contract_addr"];

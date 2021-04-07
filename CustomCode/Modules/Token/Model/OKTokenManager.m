@@ -6,6 +6,7 @@
 //  Copyright © 2021 Onekey. All rights reserved.
 //
 
+
 #import "OKTokenManager.h"
 @interface OKTokenManager()
 @property (nonatomic, assign) BOOL needUpdateCurrentAddress;

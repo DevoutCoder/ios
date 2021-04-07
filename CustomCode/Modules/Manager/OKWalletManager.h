@@ -142,6 +142,7 @@ typedef enum{
 - (BOOL)isETHClassification:(NSString *)coinType;
 - (NSInteger)getPrecision:(NSString *)key;
 - (NSString *)getBrowseAddressUrlTxHash:(NSString *)txHash;
+-  (NSString *)getBrowseUrlWithCurrentWalletAddress;
 @end
 
 NS_ASSUME_NONNULL_END
