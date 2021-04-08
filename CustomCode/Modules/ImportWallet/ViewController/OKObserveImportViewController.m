@@ -37,6 +37,10 @@
     self.model.delegate = self;
     self.accountNameTextField.placeholder = self.model.defaultWalletName;
 }
+- (UIColor *)navBarTintColor {
+    return UIColor.BG_W02;
+}
+
 #pragma mark - 导入
 - (IBAction)importBtnClick:(UIButton *)sender
 {

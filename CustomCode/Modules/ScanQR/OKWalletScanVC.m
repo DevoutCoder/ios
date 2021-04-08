@@ -75,6 +75,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:UIColor.blackColor};
     [self.scanManager sessionStopRunning];
 }
 

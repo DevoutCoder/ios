@@ -119,7 +119,9 @@ static const CGFloat advanceCellHeight = 44;
     }
     self.btcTypeLabel.text = typeStr.localized;
 }
-
+- (UIColor *)navBarTintColor {
+    return UIColor.BG_W02;
+}
 - (IBAction)importBtnClick:(UIButton *)sender {
     id reult =  [kPyCommandsManager callInterface:kInterfaceverify_legality parameter:@{@"data":self.textView.text,@"flag":@"private",@"coin":[self.model.coinType lowercaseString]}];
     if (reult != nil) {
