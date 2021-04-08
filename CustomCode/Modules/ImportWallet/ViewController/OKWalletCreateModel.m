@@ -76,7 +76,7 @@
 }
 
 - (void)createByImportAddress {
-    NSDictionary *create =  [kPyCommandsManager callInterface:kInterfaceImport_Address parameter:@{@"name":self.walletName,@"address":self.address,@"coin":self.coinType}];
+    NSDictionary *create =  [kPyCommandsManager callInterface:kInterfaceImport_Address parameter:@{@"name":self.walletName,@"address":self.address,@"coin":[self.coinType lowercaseString]}];
     OKCreateResultModel *createResultModel = [OKCreateResultModel mj_objectWithKeyValues:create];
     if (createResultModel) {
         [kTools tipMessage:MyLocalizedString(@"Import success", nil)];

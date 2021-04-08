@@ -7,12 +7,11 @@
 //
 
 #import "BaseViewController.h"
-
+#import "OKWalletCreateModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OKPrivateImportViewController : BaseViewController
-@property (nonatomic,assign)OKAddType importType;
-@property (nonatomic,copy)NSString *coinType;
+@property (nonatomic, strong) OKWalletCreateModel *model;
 + (instancetype)privateImportViewController;
 
 @end

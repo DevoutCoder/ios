@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSInteger)compareVersion:(NSString *)version1 version2:(NSString *)version2;
 - (void)alertTips:(NSString *)title desc:(NSString *)desc confirm:(void(^)(void))cblock cancel:(void(^)(void))cancel vc:(UIViewController *)vc conLabel:(NSString *)conLabel isOneBtn:(BOOL)oneBtn;
 - (BOOL)clearDataWithFilePath:(NSString *)path;
+- (void)showTipsSystem:(NSString *)title msg:(NSString *)msg cancle:(BOOL)cancle confirm:(void(^)(void))confirm;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -73,25 +73,31 @@
     switch (indexPath.row) {
         case 0:
         {
+            OKWalletCreateModel *model = [[OKWalletCreateModel alloc] init];
             OKPrivateImportViewController *privateImportVc = [OKPrivateImportViewController privateImportViewController];
-            privateImportVc.importType = OKAddTypeImportPrivkeys;
-            privateImportVc.coinType = self.coinType;
+            model.addType = OKAddTypeImportPrivkeys;
+            model.coinType = self.coinType;
+            privateImportVc.model = model;
             [self.navigationController pushViewController:privateImportVc animated:YES];
         }
             break;
         case 2:
         {
+            OKWalletCreateModel *model = [[OKWalletCreateModel alloc] init];
             OKObserveImportViewController *observeImportVc = [OKObserveImportViewController observeImportViewController];
-            observeImportVc.importType = OKAddTypeImportAddresses;
-            observeImportVc.coinType = self.coinType;
+            model.addType = OKAddTypeImportAddresses;
+            model.coinType = self.coinType;
+            observeImportVc.model = model;
             [self.navigationController pushViewController:observeImportVc animated:YES];
         }
             break;
         case 3:
         {
+            OKWalletCreateModel *model = [[OKWalletCreateModel alloc] init];
             OKKeystoreImportViewController *keystoreImportVc = [OKKeystoreImportViewController keystoreImportViewController];
-            keystoreImportVc.importType = OKAddTypeImportKeystore;
-            keystoreImportVc.coinType = self.coinType;
+            model.addType = OKAddTypeImportKeystore;
+            model.coinType = self.coinType;
+            keystoreImportVc.model = model;
             [self.navigationController pushViewController:keystoreImportVc animated:YES];
         }
             break;

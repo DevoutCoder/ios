@@ -11,23 +11,19 @@
 
 @interface OKKeystoreImportViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
-
 @property (weak, nonatomic) IBOutlet UIView *textBgView;
 @property (weak, nonatomic) IBOutlet OKLabel *textPlacehoderLabel;
-
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
-@property (weak, nonatomic) IBOutlet UILabel *tips1Label;
-@property (weak, nonatomic) IBOutlet UILabel *tips2Label;
 @property (weak, nonatomic) IBOutlet OKButton *importBtn;
 - (IBAction)importBtnClick:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIView *leftBgView;
-
 @property (weak, nonatomic) IBOutlet UIView *pwdBgView;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 @property (weak, nonatomic) IBOutlet UIButton *eyeBtn;
 - (IBAction)eyeBtnClick:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *accountNameBgView;
+@property (weak, nonatomic) IBOutlet UILabel *accountNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *accountNameTextField;
 
 @end
 
@@ -40,18 +36,18 @@
     [super viewDidLoad];
 
     self.title = MyLocalizedString(@"Keystore import", nil);
-    self.iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"token_%@",[self.coinType lowercaseString]]];
-    [self.textBgView setLayerBoarderColor:HexColor(0xDBDEE7) width:1 radius:20];
     self.textPlacehoderLabel.text = MyLocalizedString(@"Copy and paste the contents of the Keystore file, or scan it Keystore QR code import", nil);
-    self.tips1Label.text = MyLocalizedString(@"Once imported, the private key is encrypted and stored on your local device for safekeeping. OneKey does not store any private data, nor can it retrieve it for you", nil);
-    self.tips2Label.text = MyLocalizedString(@"privateimporttips2", nil);
-    [self.leftBgView setLayerRadius:2];
     [self.importBtn setLayerDefaultRadius];
-    [self.pwdBgView setLayerBoarderColor:HexColor(0xDBDEE7) width:1 radius:20];
-
     self.pwdTextField.placeholder = MyLocalizedString(@"Enter the Keystore file password", nil);
     [self textChange];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemScanBtnWithTarget:self selector:@selector(scanBtnClick)];
+    [self stupUI];
+}
+- (void)stupUI
+{
+    self.model = self.model ?: [[OKWalletCreateModel alloc] init];
+    self.model.delegate = self;
+    self.accountNameTextField.placeholder = self.model.defaultWalletName;
 }
 
 #pragma mark - 导入
@@ -66,15 +62,13 @@
         return;
     }
 
-    id result = [kPyCommandsManager callInterface:kInterfaceverify_legality parameter:@{@"data":self.textView.text,@"flag":@"keystore",@"password":self.pwdTextField.text,@"coin":[self.coinType lowercaseString]}];
+    id result = [kPyCommandsManager callInterface:kInterfaceverify_legality parameter:@{@"data":self.textView.text,@"flag":@"keystore",@"password":self.pwdTextField.text,@"coin":[self.model.coinType lowercaseString]}];
     if (result != nil) {
-        OKSetWalletNameViewController *setNameVc = [OKSetWalletNameViewController setWalletNameViewController];
-        setNameVc.addType = self.importType;
-        setNameVc.coinType = self.coinType;
-        setNameVc.keystores = self.textView.text;
-        setNameVc.keystore_password = self.pwdTextField.text;
-        setNameVc.where = OKWhereToSelectTypeWalletList;
-        [self.navigationController pushViewController:setNameVc animated:YES];
+        self.model.where = OKWhereToSelectTypeWalletList;
+        self.model.keystores = self.textView.text;
+        self.model.keystore_password = self.pwdTextField.text;
+        self.model.walletName = self.accountNameTextField.text;
+        [self.model create];
     }
 }
 #pragma mark - 扫描

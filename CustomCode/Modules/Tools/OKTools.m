@@ -319,4 +319,22 @@
     UIView *view = [[UIApplication sharedApplication].delegate window];
     [MBProgressHUD hideHUDForView:view animated:YES];
 }
+
+- (void)showTipsSystem:(NSString *)title msg:(NSString *)msg cancle:(BOOL)cancle confirm:(void(^)(void))confirm
+{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+    if (cancle) {
+        UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:MyLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+
+        }];
+        [alertVc addAction:cancelBtn];
+    }
+    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:MyLocalizedString(@"determine", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull   action) {
+        if (confirm) {
+            confirm();
+        }
+    }];
+    [alertVc addAction :sureBtn];
+    [self.OK_TopViewController presentViewController:alertVc animated:YES completion:nil];
+}
 @end

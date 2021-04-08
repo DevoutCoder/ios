@@ -144,7 +144,7 @@ static dispatch_once_t once;
     }else if([method isEqualToString:kInterfaceImport_Address]){
         NSString *name = [parameter safeStringForKey:@"name"];
         NSString *addresses = [parameter safeStringForKey:@"address"];
-        NSString *coin = [parameter safeStringForKey:@"coin"];
+        NSString *coin = [[parameter safeStringForKey:@"coin"] lowercaseString];
         PyObject *args =  Py_BuildValue("()");
         PyObject *kwargs;
         kwargs = Py_BuildValue("{s:s,s:s,s:s}","name",[name UTF8String], "addresses", [addresses UTF8String],"coin",[coin UTF8String]);

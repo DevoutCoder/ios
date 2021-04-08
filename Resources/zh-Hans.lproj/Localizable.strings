@@ -54,13 +54,11 @@
 "Select import method" = "选择导入方式";
 "Keystore import" = "Keystore 导入";
 "Observe the purse import" = "观察钱包";
-"Once imported, the private key is encrypted and stored on your local device for safekeeping. OneKey does not store any private data, nor can it retrieve it for you" = "私钥一旦导入，就会经过加密存储在您的本地设备中并妥当保管。OneKey 不存储任何私密数据，也无法帮您找回。";
 "privateimporttips2" = "- 不要轻易卸载 OneKey App \n\n - 不要将助记词、私钥泄露给任何人 \n\n - 不要截屏、通过聊天工具等传送以上敏感信息";
 "Enter the private key or scan the QR code (case sensitive)" = "输入私钥或扫描其二维码（注意大小写）";
 "Enter the Keystore file password" = "输入 Keystore 文件密码";
 "Copy and paste the contents of the Keystore file, or scan it Keystore QR code import" = "复制粘贴 Keystore 文件内容，或者通过扫描 Keystore 二维码导入";
 "Please enter an address or public key, support xPub, or scan Two-dimensional code import" = "请输入地址或公钥，支持xPub，或者扫描二维码导入";
-"Observing a wallet does not require importing a private key or mnemonic, just an address or public key, which you can use to track daily transactions or to receive notifications of incoming or outgoing money" = "观察钱包不需要导入私钥或助记词，只需要地址或公钥，您可以用来追踪日常交易记录或接收收发币的通知。";
 "Scan goes to" = "扫一扫转入";
 "The wallet address" = "钱包地址";
 "ok collection" = "收款";
@@ -633,9 +631,10 @@
 "import.path" = "路径";
 "import.btc.addresstype" = "账户地址类型选择后无法更改，推荐选择隔离见证（兼容） SegWit。
 隔离见证（兼容） SegWit，生成的地址以 3 开头，已广泛普及，转账手续费较低。隔离见证（原生）Native SegWit 以 bc1 开头，目前正在普及，手续费最低。普通地址 Legacy 以 1开头，手续费略高。";
+"import.privatekey.tipstitle" = "无效的私钥";
+"import.privatekey.toptips" =  "导入的私钥将加密存储在本地，永不触网";
+"import.privatekey.addresstype.tips" = "账户地址类型选择后无法更改，推荐选择隔离见证（兼容） SegWit。";
+"import.Observe.tips" = "观察钱包无需导入私钥或助记词。只需要输入地址或公钥，就可以追踪日常交易记录并接收转账通知。";
 
 "See more records" = "查看更多记录  ";
 "See more" = "查看更多  ";
-
-
-

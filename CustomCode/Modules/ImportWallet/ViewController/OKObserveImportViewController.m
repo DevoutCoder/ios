@@ -10,13 +10,14 @@
 #import "OKSetWalletNameViewController.h"
 
 @interface OKObserveImportViewController ()<UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UIView *textBgView;
 @property (weak, nonatomic) IBOutlet OKLabel *textPlacehoderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UILabel *tips1Label;
 @property (weak, nonatomic) IBOutlet OKButton *importBtn;
 - (IBAction)importBtnClick:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIView *accountNameBgView;
+@property (weak, nonatomic) IBOutlet UILabel *accountNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *accountNameTextField;
 @end
 
 @implementation OKObserveImportViewController
@@ -28,30 +29,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = MyLocalizedString(@"Observe the purse import", nil);
-    self.iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"token_%@",[self.coinType lowercaseString]]];
-    [self.textBgView setLayerBoarderColor:HexColor(0xDBDEE7) width:1 radius:20];
     self.textPlacehoderLabel.text = MyLocalizedString(@"Please enter an address or public key, support xPub, or scan Two-dimensional code import", nil);
-    self.tips1Label.text = MyLocalizedString(@"Observing a wallet does not require importing a private key or mnemonic, just an address or public key, which you can use to track daily transactions or to receive notifications of incoming or outgoing money", nil);
-    [self.importBtn setLayerDefaultRadius];
+    [self.importBtn setLayerRadius:8];
     [self textChange];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemScanBtnWithTarget:self selector:@selector(scanBtnClick)];
-
+    self.model = self.model ?: [[OKWalletCreateModel alloc] init];
+    self.model.delegate = self;
+    self.accountNameTextField.placeholder = self.model.defaultWalletName;
 }
 #pragma mark - 导入
 - (IBAction)importBtnClick:(UIButton *)sender
 {
-    if (self.textView.text.length == 0) {
-        [kTools tipMessage:MyLocalizedString(@"The address cannot be empty", nil)];
-        return;
-    }
     id result =  [kPyCommandsManager callInterface:kInterfaceverify_legality parameter:@{@"data":self.textView.text,@"flag":@"address"}];
     if (result != nil) {
-        OKSetWalletNameViewController *setNameVc = [OKSetWalletNameViewController setWalletNameViewController];
-        setNameVc.addType = self.importType;
-        setNameVc.coinType = self.coinType;
-        setNameVc.address = self.textView.text;
-        setNameVc.where = OKWhereToSelectTypeWalletList;
-        [self.navigationController pushViewController:setNameVc animated:YES];
+        self.model.where = OKWhereToSelectTypeWalletList;
+        self.model.address = self.textView.text;
+        self.model.walletName = self.accountNameTextField.text;
+        [self.model create];
     }
 }
 #pragma mark - 扫描
@@ -121,7 +115,6 @@
             }
         }
     }
-
     return YES;
 }
 
